@@ -153,27 +153,44 @@ export default function Dashboard() {
           </div>
 
           <nav className="space-y-2">
-            {sidebarItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 ${
-                  activeTab === item.id
+            {sidebarItems.map((item) => {
+              const isActive = activeTab === item.id;
+              const content = (
+                <div className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 ${
+                  isActive
                     ? 'gradient-bg glow-effect text-white'
                     : 'text-gray-300 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <div className="flex items-center space-x-3">
-                  {item.icon}
-                  <span>{item.label}</span>
+                }`}>
+                  <div className="flex items-center space-x-3">
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </div>
+                  {item.count && (
+                    <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
+                      {item.count}
+                    </Badge>
+                  )}
                 </div>
-                {item.count && (
-                  <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
-                    {item.count}
-                  </Badge>
-                )}
-              </button>
-            ))}
+              );
+
+              if (item.id === 'resume') {
+                return (
+                  <Link key={item.id} to="/resume-builder" onClick={() => setActiveTab(item.id)}>
+                    {content}
+                  </Link>
+                );
+              }
+
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className="w-full"
+                >
+                  {content}
+                </button>
+              );
+            })}
           </nav>
 
           <div className="mt-8 pt-8 border-t border-white/10">
