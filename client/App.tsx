@@ -13,6 +13,7 @@ import CoverLetter from "./pages/CoverLetter";
 import Portfolio from "./pages/Portfolio";
 import InterviewPrep from "./pages/InterviewPrep";
 import CareerTracker from "./pages/CareerTracker";
+import JobMatchAnalyzer from "./pages/JobMatchAnalyzer";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
