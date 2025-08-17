@@ -1,13 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { 
-  ArrowLeft, 
-  Sparkles, 
-  Target, 
+import {
+  ArrowLeft,
+  Sparkles,
+  Target,
   Play,
   Pause,
   Mic,
@@ -26,7 +32,7 @@ import {
   Users,
   Award,
   Calendar,
-  RefreshCw
+  RefreshCw,
 } from "lucide-react";
 
 export default function InterviewPrep() {
@@ -46,51 +52,54 @@ export default function InterviewPrep() {
       description: "Coding problems and system design questions",
       duration: "45-60 min",
       difficulty: "Advanced",
-      icon: <Brain className="w-6 h-6" />
+      icon: <Brain className="w-6 h-6" />,
     },
     {
       id: "behavioral",
       name: "Behavioral Interview",
       description: "Soft skills and past experience questions",
-      duration: "30-45 min", 
+      duration: "30-45 min",
       difficulty: "Intermediate",
-      icon: <Users className="w-6 h-6" />
+      icon: <Users className="w-6 h-6" />,
     },
     {
       id: "leadership",
       name: "Leadership Interview",
       description: "Management and decision-making scenarios",
       duration: "45-60 min",
-      difficulty: "Advanced", 
-      icon: <Award className="w-6 h-6" />
-    }
+      difficulty: "Advanced",
+      icon: <Award className="w-6 h-6" />,
+    },
   ];
 
   const questions = [
     {
       id: 1,
       type: "behavioral",
-      question: "Tell me about a challenging project you worked on and how you overcame the obstacles.",
+      question:
+        "Tell me about a challenging project you worked on and how you overcame the obstacles.",
       category: "Problem Solving",
       difficulty: "Medium",
-      timeLimit: 3
+      timeLimit: 3,
     },
     {
       id: 2,
       type: "technical",
-      question: "How would you design a scalable system to handle millions of users?",
+      question:
+        "How would you design a scalable system to handle millions of users?",
       category: "System Design",
       difficulty: "Hard",
-      timeLimit: 5
+      timeLimit: 5,
     },
     {
       id: 3,
       type: "behavioral",
-      question: "Describe a time when you had to work with a difficult team member.",
+      question:
+        "Describe a time when you had to work with a difficult team member.",
       category: "Teamwork",
       difficulty: "Medium",
-      timeLimit: 3
-    }
+      timeLimit: 3,
+    },
   ];
 
   const practiceHistory = [
@@ -101,26 +110,26 @@ export default function InterviewPrep() {
       score: 85,
       duration: "45 min",
       questions: 8,
-      status: "completed"
+      status: "completed",
     },
     {
       id: 2,
-      type: "Behavioral Interview", 
+      type: "Behavioral Interview",
       date: "2024-01-10",
       score: 78,
       duration: "30 min",
       questions: 5,
-      status: "completed"
+      status: "completed",
     },
     {
       id: 3,
       type: "Leadership Interview",
       date: "2024-01-08",
       score: 72,
-      duration: "60 min", 
+      duration: "60 min",
       questions: 10,
-      status: "completed"
-    }
+      status: "completed",
+    },
   ];
 
   // Timer effect
@@ -128,7 +137,7 @@ export default function InterviewPrep() {
     let interval: NodeJS.Timeout;
     if (isActive) {
       interval = setInterval(() => {
-        setSessionTime(seconds => seconds + 1);
+        setSessionTime((seconds) => seconds + 1);
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -137,7 +146,7 @@ export default function InterviewPrep() {
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   const toggleRecording = () => {
@@ -172,7 +181,11 @@ export default function InterviewPrep() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link to="/dashboard">
-              <Button variant="outline" size="sm" className="glass border-white/20 text-white hover:bg-white/10">
+              <Button
+                variant="outline"
+                size="sm"
+                className="glass border-white/20 text-white hover:bg-white/10"
+              >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Dashboard
               </Button>
@@ -181,14 +194,15 @@ export default function InterviewPrep() {
               <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-rose-500 rounded-lg flex items-center justify-center">
                 <Target className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold gradient-text">Interview Prep</span>
+              <span className="text-xl font-bold gradient-text">
+                Interview Prep
+              </span>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <Badge className="bg-green-500/20 text-green-300 border-green-500/30">
-              <CheckCircle className="w-3 h-3 mr-1" />
-              3 Sessions Completed
+              <CheckCircle className="w-3 h-3 mr-1" />3 Sessions Completed
             </Badge>
           </div>
         </div>
@@ -197,25 +211,36 @@ export default function InterviewPrep() {
       <div className="relative z-10 container mx-auto px-4 py-6">
         {/* Interview Type Selection */}
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-white mb-6">Choose Interview Type</h2>
+          <h2 className="text-2xl font-bold text-white mb-6">
+            Choose Interview Type
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {interviewTypes.map((type) => (
-              <Card key={type.id} className="glass border-white/20 bg-transparent glow-hover cursor-pointer">
+              <Card
+                key={type.id}
+                className="glass border-white/20 bg-transparent glow-hover cursor-pointer"
+              >
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center glow-effect">
                       {type.icon}
                     </div>
-                    <Badge className={`${
-                      type.difficulty === 'Advanced' 
-                        ? 'bg-red-500/20 text-red-300 border-red-500/30'
-                        : 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30'
-                    }`}>
+                    <Badge
+                      className={`${
+                        type.difficulty === "Advanced"
+                          ? "bg-red-500/20 text-red-300 border-red-500/30"
+                          : "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
+                      }`}
+                    >
                       {type.difficulty}
                     </Badge>
                   </div>
-                  <h3 className="text-white font-semibold text-lg mb-2">{type.name}</h3>
-                  <p className="text-gray-300 text-sm mb-4">{type.description}</p>
+                  <h3 className="text-white font-semibold text-lg mb-2">
+                    {type.name}
+                  </h3>
+                  <p className="text-gray-300 text-sm mb-4">
+                    {type.description}
+                  </p>
                   <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
                     <span className="flex items-center space-x-1">
                       <Clock className="w-4 h-4" />
@@ -247,7 +272,9 @@ export default function InterviewPrep() {
                     <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
                       Question {currentQuestion + 1} of {questions.length}
                     </Badge>
-                    <span className="text-white font-mono text-lg">{formatTime(sessionTime)}</span>
+                    <span className="text-white font-mono text-lg">
+                      {formatTime(sessionTime)}
+                    </span>
                   </div>
                 </div>
               </CardHeader>
@@ -258,13 +285,15 @@ export default function InterviewPrep() {
                     <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
                       {questions[currentQuestion].category}
                     </Badge>
-                    <Badge className={`${
-                      questions[currentQuestion].difficulty === 'Hard'
-                        ? 'bg-red-500/20 text-red-300 border-red-500/30'
-                        : questions[currentQuestion].difficulty === 'Medium'
-                        ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30'
-                        : 'bg-green-500/20 text-green-300 border-green-500/30'
-                    }`}>
+                    <Badge
+                      className={`${
+                        questions[currentQuestion].difficulty === "Hard"
+                          ? "bg-red-500/20 text-red-300 border-red-500/30"
+                          : questions[currentQuestion].difficulty === "Medium"
+                            ? "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
+                            : "bg-green-500/20 text-green-300 border-green-500/30"
+                      }`}
+                    >
                       {questions[currentQuestion].difficulty}
                     </Badge>
                   </div>
@@ -272,7 +301,8 @@ export default function InterviewPrep() {
                     {questions[currentQuestion].question}
                   </h3>
                   <p className="text-gray-400 text-sm">
-                    Recommended time: {questions[currentQuestion].timeLimit} minutes
+                    Recommended time: {questions[currentQuestion].timeLimit}{" "}
+                    minutes
                   </p>
                 </div>
 
@@ -282,33 +312,45 @@ export default function InterviewPrep() {
                     size="lg"
                     onClick={toggleRecording}
                     className={`w-16 h-16 rounded-full ${
-                      isRecording 
-                        ? 'bg-red-500 hover:bg-red-600 text-white' 
-                        : 'gradient-bg glow-effect text-white border-0'
+                      isRecording
+                        ? "bg-red-500 hover:bg-red-600 text-white"
+                        : "gradient-bg glow-effect text-white border-0"
                     }`}
                   >
-                    {isRecording ? <Pause className="w-6 h-6" /> : <Play className="w-6 h-6" />}
+                    {isRecording ? (
+                      <Pause className="w-6 h-6" />
+                    ) : (
+                      <Play className="w-6 h-6" />
+                    )}
                   </Button>
-                  
+
                   <div className="flex space-x-4">
                     <Button
                       variant="outline"
                       size="lg"
                       className={`glass border-white/20 text-white hover:bg-white/10 ${
-                        isRecording ? 'bg-red-500/20 border-red-500/30' : ''
+                        isRecording ? "bg-red-500/20 border-red-500/30" : ""
                       }`}
                     >
-                      {isRecording ? <Mic className="w-5 h-5" /> : <MicOff className="w-5 h-5" />}
+                      {isRecording ? (
+                        <Mic className="w-5 h-5" />
+                      ) : (
+                        <MicOff className="w-5 h-5" />
+                      )}
                     </Button>
                     <Button
                       variant="outline"
                       size="lg"
                       className={`glass border-white/20 text-white hover:bg-white/10 ${
-                        isSpeaking ? 'bg-blue-500/20 border-blue-500/30' : ''
+                        isSpeaking ? "bg-blue-500/20 border-blue-500/30" : ""
                       }`}
                       onClick={() => setIsSpeaking(!isSpeaking)}
                     >
-                      {isSpeaking ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
+                      {isSpeaking ? (
+                        <Volume2 className="w-5 h-5" />
+                      ) : (
+                        <VolumeX className="w-5 h-5" />
+                      )}
                     </Button>
                   </div>
                 </div>
@@ -383,15 +425,21 @@ export default function InterviewPrep() {
               <CardContent className="space-y-3">
                 <div className="flex items-start space-x-2">
                   <CheckCircle className="w-4 h-4 text-green-400 mt-0.5" />
-                  <span className="text-gray-300 text-sm">Use the STAR method for behavioral questions</span>
+                  <span className="text-gray-300 text-sm">
+                    Use the STAR method for behavioral questions
+                  </span>
                 </div>
                 <div className="flex items-start space-x-2">
                   <CheckCircle className="w-4 h-4 text-green-400 mt-0.5" />
-                  <span className="text-gray-300 text-sm">Speak clearly and at a moderate pace</span>
+                  <span className="text-gray-300 text-sm">
+                    Speak clearly and at a moderate pace
+                  </span>
                 </div>
                 <div className="flex items-start space-x-2">
                   <AlertCircle className="w-4 h-4 text-yellow-400 mt-0.5" />
-                  <span className="text-gray-300 text-sm">Reduce filler words like "um" and "uh"</span>
+                  <span className="text-gray-300 text-sm">
+                    Reduce filler words like "um" and "uh"
+                  </span>
                 </div>
               </CardContent>
             </Card>
@@ -412,7 +460,10 @@ export default function InterviewPrep() {
           <CardContent>
             <div className="space-y-4">
               {practiceHistory.map((session) => (
-                <div key={session.id} className="flex items-center justify-between p-4 glass rounded-lg border border-white/10">
+                <div
+                  key={session.id}
+                  className="flex items-center justify-between p-4 glass rounded-lg border border-white/10"
+                >
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg flex items-center justify-center">
                       <Target className="w-6 h-6 text-white" />
@@ -422,7 +473,9 @@ export default function InterviewPrep() {
                       <div className="flex items-center space-x-4 text-sm text-gray-400">
                         <span className="flex items-center space-x-1">
                           <Calendar className="w-4 h-4" />
-                          <span>{new Date(session.date).toLocaleDateString()}</span>
+                          <span>
+                            {new Date(session.date).toLocaleDateString()}
+                          </span>
                         </span>
                         <span className="flex items-center space-x-1">
                           <Clock className="w-4 h-4" />
@@ -434,10 +487,16 @@ export default function InterviewPrep() {
                   </div>
                   <div className="flex items-center space-x-4">
                     <div className="text-right">
-                      <div className="text-2xl font-bold gradient-text">{session.score}%</div>
+                      <div className="text-2xl font-bold gradient-text">
+                        {session.score}%
+                      </div>
                       <div className="text-sm text-gray-400">Score</div>
                     </div>
-                    <Button size="sm" variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="glass border-white/20 text-white hover:bg-white/10"
+                    >
                       <RefreshCw className="w-4 h-4 mr-2" />
                       Retry
                     </Button>

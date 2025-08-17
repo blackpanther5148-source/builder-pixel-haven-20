@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { ArrowLeft, Sparkles, Construction } from "lucide-react";
 
 interface PlaceholderPageProps {
@@ -9,10 +15,10 @@ interface PlaceholderPageProps {
   icon?: React.ReactNode;
 }
 
-export default function PlaceholderPage({ 
-  title, 
-  description, 
-  icon = <Construction className="w-12 h-12" /> 
+export default function PlaceholderPage({
+  title,
+  description,
+  icon = <Construction className="w-12 h-12" />,
 }: PlaceholderPageProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
@@ -31,9 +37,12 @@ export default function PlaceholderPage({
             </div>
             <span className="text-xl font-bold gradient-text">Profyle</span>
           </Link>
-          
+
           <Link to="/dashboard">
-            <Button variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+            <Button
+              variant="outline"
+              className="glass border-white/20 text-white hover:bg-white/10"
+            >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Dashboard
             </Button>
@@ -55,7 +64,8 @@ export default function PlaceholderPage({
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-gray-400">
-              This feature is coming soon! We're working hard to bring you the best AI-powered career tools.
+              This feature is coming soon! We're working hard to bring you the
+              best AI-powered career tools.
             </p>
             <div className="space-y-2">
               <Link to="/dashboard">
@@ -64,7 +74,10 @@ export default function PlaceholderPage({
                 </Button>
               </Link>
               <Link to="/">
-                <Button variant="outline" className="w-full glass border-white/20 text-white hover:bg-white/10">
+                <Button
+                  variant="outline"
+                  className="w-full glass border-white/20 text-white hover:bg-white/10"
+                >
                   Go to Homepage
                 </Button>
               </Link>

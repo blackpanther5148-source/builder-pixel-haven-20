@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
-import { 
-  ArrowLeft, 
-  Sparkles, 
-  Brain, 
+import {
+  ArrowLeft,
+  Sparkles,
+  Brain,
   Search,
   Upload,
   Zap,
@@ -41,7 +47,7 @@ import {
   Coffee,
   ChevronRight,
   Plus,
-  Minus
+  Minus,
 } from "lucide-react";
 
 export default function JobMatchAnalyzer() {
@@ -90,7 +96,7 @@ Benefits:
     experienceMatch: 85,
     educationMatch: 90,
     requirementsMatch: 88,
-    
+
     matchedSkills: [
       { skill: "React", level: "Expert", match: 100, required: true },
       { skill: "TypeScript", level: "Advanced", match: 95, required: true },
@@ -99,54 +105,59 @@ Benefits:
       { skill: "CSS3", level: "Advanced", match: 95, required: true },
       { skill: "Git", level: "Advanced", match: 90, required: true },
       { skill: "Jest", level: "Intermediate", match: 80, required: false },
-      { skill: "Webpack", level: "Intermediate", match: 75, required: false }
+      { skill: "Webpack", level: "Intermediate", match: 75, required: false },
     ],
 
     missingSkills: [
       { skill: "Next.js", importance: "Preferred", impact: "Low" },
       { skill: "Redux", importance: "Preferred", impact: "Medium" },
-      { skill: "AWS", importance: "Preferred", impact: "Low" }
+      { skill: "AWS", importance: "Preferred", impact: "Low" },
     ],
 
     suggestions: [
       {
         category: "Skills",
         priority: "High",
-        suggestion: "Consider adding Next.js experience to your resume - it's mentioned as a preferred qualification",
-        action: "Take an online course or build a project with Next.js"
+        suggestion:
+          "Consider adding Next.js experience to your resume - it's mentioned as a preferred qualification",
+        action: "Take an online course or build a project with Next.js",
       },
       {
         category: "Experience",
-        priority: "Medium", 
-        suggestion: "Highlight your 6 years of frontend experience more prominently",
-        action: "Update your resume summary to emphasize senior-level experience"
+        priority: "Medium",
+        suggestion:
+          "Highlight your 6 years of frontend experience more prominently",
+        action:
+          "Update your resume summary to emphasize senior-level experience",
       },
       {
         category: "Keywords",
         priority: "High",
-        suggestion: "Include more specific keywords like 'scalable web applications' and 'code reviews'",
-        action: "Update your job descriptions to include these exact phrases"
+        suggestion:
+          "Include more specific keywords like 'scalable web applications' and 'code reviews'",
+        action: "Update your job descriptions to include these exact phrases",
       },
       {
         category: "Certifications",
         priority: "Low",
-        suggestion: "Consider getting AWS certification for cloud platform knowledge",
-        action: "Explore AWS certification programs"
-      }
+        suggestion:
+          "Consider getting AWS certification for cloud platform knowledge",
+        action: "Explore AWS certification programs",
+      },
     ],
 
     salaryInsights: {
       yourRange: "$125,000 - $145,000",
       jobRange: "$130,000 - $160,000",
       marketAverage: "$140,000",
-      competitiveness: "Competitive"
-    }
+      competitiveness: "Competitive",
+    },
   };
 
   const handleAnalyze = async () => {
     setIsAnalyzing(true);
     setAnalysisComplete(false);
-    
+
     // Simulate analysis process
     setTimeout(() => {
       setMatchScore(analysisResults.overallMatch);
@@ -178,10 +189,14 @@ Benefits:
 
   const getPriorityColor = (priority: string) => {
     switch (priority.toLowerCase()) {
-      case "high": return "bg-red-500/20 text-red-300 border-red-500/30";
-      case "medium": return "bg-yellow-500/20 text-yellow-300 border-yellow-500/30";
-      case "low": return "bg-green-500/20 text-green-300 border-green-500/30";
-      default: return "bg-gray-500/20 text-gray-300 border-gray-500/30";
+      case "high":
+        return "bg-red-500/20 text-red-300 border-red-500/30";
+      case "medium":
+        return "bg-yellow-500/20 text-yellow-300 border-yellow-500/30";
+      case "low":
+        return "bg-green-500/20 text-green-300 border-green-500/30";
+      default:
+        return "bg-gray-500/20 text-gray-300 border-gray-500/30";
     }
   };
 
@@ -198,7 +213,11 @@ Benefits:
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link to="/dashboard">
-              <Button variant="outline" size="sm" className="glass border-white/20 text-white hover:bg-white/10">
+              <Button
+                variant="outline"
+                size="sm"
+                className="glass border-white/20 text-white hover:bg-white/10"
+              >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Dashboard
               </Button>
@@ -207,10 +226,12 @@ Benefits:
               <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
                 <Brain className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold gradient-text">Job Match Analyzer</span>
+              <span className="text-xl font-bold gradient-text">
+                Job Match Analyzer
+              </span>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
               <Zap className="w-3 h-3 mr-1" />
@@ -225,9 +246,12 @@ Benefits:
           // Input Section
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-white mb-4">Analyze Your Job Match</h1>
+              <h1 className="text-3xl font-bold text-white mb-4">
+                Analyze Your Job Match
+              </h1>
               <p className="text-gray-300 text-lg">
-                Discover how well your profile matches any job posting with AI-powered analysis
+                Discover how well your profile matches any job posting with
+                AI-powered analysis
               </p>
             </div>
 
@@ -261,7 +285,9 @@ Benefits:
               <CardContent className="space-y-6">
                 {activeTab === "url" ? (
                   <div>
-                    <label className="block text-white font-medium mb-2">Job Posting URL</label>
+                    <label className="block text-white font-medium mb-2">
+                      Job Posting URL
+                    </label>
                     <div className="flex space-x-4">
                       <Input
                         value={jobUrl}
@@ -288,12 +314,15 @@ Benefits:
                       </Button>
                     </div>
                     <p className="text-gray-400 text-sm mt-2">
-                      Enter the URL of any job posting from LinkedIn, Indeed, or company career pages
+                      Enter the URL of any job posting from LinkedIn, Indeed, or
+                      company career pages
                     </p>
                   </div>
                 ) : (
                   <div>
-                    <label className="block text-white font-medium mb-2">Job Description</label>
+                    <label className="block text-white font-medium mb-2">
+                      Job Description
+                    </label>
                     <Textarea
                       value={jobDescription}
                       onChange={(e) => setJobDescription(e.target.value)}
@@ -330,7 +359,9 @@ Benefits:
                     <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
                       <Brain className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-white font-semibold text-lg mb-2">AI Analysis in Progress</h3>
+                    <h3 className="text-white font-semibold text-lg mb-2">
+                      AI Analysis in Progress
+                    </h3>
                     <p className="text-gray-300 mb-4">
                       Analyzing job requirements against your profile...
                     </p>
@@ -363,12 +394,17 @@ Benefits:
             {/* Overall Match Score */}
             <Card className="glass border-white/20 bg-transparent">
               <CardHeader>
-                <CardTitle className="text-white text-center text-2xl">Overall Job Match</CardTitle>
+                <CardTitle className="text-white text-center text-2xl">
+                  Overall Job Match
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-center">
                   <div className="relative w-48 h-48">
-                    <svg className="w-48 h-48 transform -rotate-90" viewBox="0 0 100 100">
+                    <svg
+                      className="w-48 h-48 transform -rotate-90"
+                      viewBox="0 0 100 100"
+                    >
                       <circle
                         cx="50"
                         cy="50"
@@ -391,7 +427,13 @@ Benefits:
                         strokeLinecap="round"
                       />
                       <defs>
-                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <linearGradient
+                          id="gradient"
+                          x1="0%"
+                          y1="0%"
+                          x2="100%"
+                          y2="0%"
+                        >
                           <stop offset="0%" stopColor="#10B981" />
                           <stop offset="50%" stopColor="#3B82F6" />
                           <stop offset="100%" stopColor="#8B5CF6" />
@@ -400,7 +442,9 @@ Benefits:
                     </svg>
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
-                        <div className={`text-5xl font-bold ${getMatchColor(matchScore)}`}>
+                        <div
+                          className={`text-5xl font-bold ${getMatchColor(matchScore)}`}
+                        >
                           {matchScore}%
                         </div>
                         <div className="text-gray-400 text-lg">Match</div>
@@ -409,7 +453,9 @@ Benefits:
                   </div>
                 </div>
                 <div className="text-center mt-6">
-                  <Badge className={`text-lg px-4 py-2 ${getMatchBgColor(matchScore)}`}>
+                  <Badge
+                    className={`text-lg px-4 py-2 ${getMatchBgColor(matchScore)}`}
+                  >
                     <Award className="w-5 h-5 mr-2" />
                     Excellent Match
                   </Badge>
@@ -421,38 +467,58 @@ Benefits:
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <Card className="glass border-white/20 bg-transparent">
                 <CardContent className="p-4 text-center">
-                  <div className={`text-2xl font-bold ${getMatchColor(analysisResults.skillsMatch)}`}>
+                  <div
+                    className={`text-2xl font-bold ${getMatchColor(analysisResults.skillsMatch)}`}
+                  >
                     {analysisResults.skillsMatch}%
                   </div>
                   <div className="text-gray-400 text-sm">Skills Match</div>
-                  <Progress value={analysisResults.skillsMatch} className="h-2 mt-2" />
+                  <Progress
+                    value={analysisResults.skillsMatch}
+                    className="h-2 mt-2"
+                  />
                 </CardContent>
               </Card>
               <Card className="glass border-white/20 bg-transparent">
                 <CardContent className="p-4 text-center">
-                  <div className={`text-2xl font-bold ${getMatchColor(analysisResults.experienceMatch)}`}>
+                  <div
+                    className={`text-2xl font-bold ${getMatchColor(analysisResults.experienceMatch)}`}
+                  >
                     {analysisResults.experienceMatch}%
                   </div>
                   <div className="text-gray-400 text-sm">Experience</div>
-                  <Progress value={analysisResults.experienceMatch} className="h-2 mt-2" />
+                  <Progress
+                    value={analysisResults.experienceMatch}
+                    className="h-2 mt-2"
+                  />
                 </CardContent>
               </Card>
               <Card className="glass border-white/20 bg-transparent">
                 <CardContent className="p-4 text-center">
-                  <div className={`text-2xl font-bold ${getMatchColor(analysisResults.educationMatch)}`}>
+                  <div
+                    className={`text-2xl font-bold ${getMatchColor(analysisResults.educationMatch)}`}
+                  >
                     {analysisResults.educationMatch}%
                   </div>
                   <div className="text-gray-400 text-sm">Education</div>
-                  <Progress value={analysisResults.educationMatch} className="h-2 mt-2" />
+                  <Progress
+                    value={analysisResults.educationMatch}
+                    className="h-2 mt-2"
+                  />
                 </CardContent>
               </Card>
               <Card className="glass border-white/20 bg-transparent">
                 <CardContent className="p-4 text-center">
-                  <div className={`text-2xl font-bold ${getMatchColor(analysisResults.requirementsMatch)}`}>
+                  <div
+                    className={`text-2xl font-bold ${getMatchColor(analysisResults.requirementsMatch)}`}
+                  >
                     {analysisResults.requirementsMatch}%
                   </div>
                   <div className="text-gray-400 text-sm">Requirements</div>
-                  <Progress value={analysisResults.requirementsMatch} className="h-2 mt-2" />
+                  <Progress
+                    value={analysisResults.requirementsMatch}
+                    className="h-2 mt-2"
+                  />
                 </CardContent>
               </Card>
             </div>
@@ -468,16 +534,27 @@ Benefits:
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {analysisResults.matchedSkills.map((skill, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 glass rounded-lg border border-white/10">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 glass rounded-lg border border-white/10"
+                    >
                       <div className="flex items-center space-x-3">
-                        <div className={`w-2 h-2 rounded-full ${skill.required ? 'bg-red-400' : 'bg-blue-400'}`} />
+                        <div
+                          className={`w-2 h-2 rounded-full ${skill.required ? "bg-red-400" : "bg-blue-400"}`}
+                        />
                         <div>
-                          <div className="text-white font-medium">{skill.skill}</div>
-                          <div className="text-gray-400 text-sm">{skill.level}</div>
+                          <div className="text-white font-medium">
+                            {skill.skill}
+                          </div>
+                          <div className="text-gray-400 text-sm">
+                            {skill.level}
+                          </div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className={`text-lg font-bold ${getMatchColor(skill.match)}`}>
+                        <div
+                          className={`text-lg font-bold ${getMatchColor(skill.match)}`}
+                        >
                           {skill.match}%
                         </div>
                         {skill.required && (
@@ -500,19 +577,30 @@ Benefits:
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {analysisResults.missingSkills.map((skill, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 glass rounded-lg border border-white/10">
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 glass rounded-lg border border-white/10"
+                    >
                       <div className="flex items-center space-x-3">
                         <XCircle className="w-5 h-5 text-red-400" />
                         <div>
-                          <div className="text-white font-medium">{skill.skill}</div>
-                          <div className="text-gray-400 text-sm">{skill.importance}</div>
+                          <div className="text-white font-medium">
+                            {skill.skill}
+                          </div>
+                          <div className="text-gray-400 text-sm">
+                            {skill.importance}
+                          </div>
                         </div>
                       </div>
-                      <Badge className={`text-xs ${
-                        skill.impact === 'High' ? 'bg-red-500/20 text-red-300 border-red-500/30' :
-                        skill.impact === 'Medium' ? 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30' :
-                        'bg-green-500/20 text-green-300 border-green-500/30'
-                      }`}>
+                      <Badge
+                        className={`text-xs ${
+                          skill.impact === "High"
+                            ? "bg-red-500/20 text-red-300 border-red-500/30"
+                            : skill.impact === "Medium"
+                              ? "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
+                              : "bg-green-500/20 text-green-300 border-green-500/30"
+                        }`}
+                      >
                         {skill.impact} Impact
                       </Badge>
                     </div>
@@ -534,19 +622,26 @@ Benefits:
               </CardHeader>
               <CardContent className="space-y-4">
                 {analysisResults.suggestions.map((suggestion, index) => (
-                  <div key={index} className="p-4 glass rounded-lg border border-white/10">
+                  <div
+                    key={index}
+                    className="p-4 glass rounded-lg border border-white/10"
+                  >
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center space-x-2">
                         <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
                           {suggestion.category}
                         </Badge>
-                        <Badge className={getPriorityColor(suggestion.priority)}>
+                        <Badge
+                          className={getPriorityColor(suggestion.priority)}
+                        >
                           {suggestion.priority} Priority
                         </Badge>
                       </div>
                       <Target className="w-5 h-5 text-blue-400" />
                     </div>
-                    <p className="text-gray-300 mb-2">{suggestion.suggestion}</p>
+                    <p className="text-gray-300 mb-2">
+                      {suggestion.suggestion}
+                    </p>
                     <div className="flex items-center space-x-2 text-sm">
                       <ChevronRight className="w-4 h-4 text-gray-500" />
                       <span className="text-gray-400">{suggestion.action}</span>
@@ -567,19 +662,27 @@ Benefits:
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div className="text-center p-4 glass rounded-lg border border-white/10">
-                    <div className="text-lg font-bold text-blue-400">{analysisResults.salaryInsights.yourRange}</div>
+                    <div className="text-lg font-bold text-blue-400">
+                      {analysisResults.salaryInsights.yourRange}
+                    </div>
                     <div className="text-gray-400 text-sm">Your Range</div>
                   </div>
                   <div className="text-center p-4 glass rounded-lg border border-white/10">
-                    <div className="text-lg font-bold text-green-400">{analysisResults.salaryInsights.jobRange}</div>
+                    <div className="text-lg font-bold text-green-400">
+                      {analysisResults.salaryInsights.jobRange}
+                    </div>
                     <div className="text-gray-400 text-sm">Job Range</div>
                   </div>
                   <div className="text-center p-4 glass rounded-lg border border-white/10">
-                    <div className="text-lg font-bold text-purple-400">{analysisResults.salaryInsights.marketAverage}</div>
+                    <div className="text-lg font-bold text-purple-400">
+                      {analysisResults.salaryInsights.marketAverage}
+                    </div>
                     <div className="text-gray-400 text-sm">Market Average</div>
                   </div>
                   <div className="text-center p-4 glass rounded-lg border border-white/10">
-                    <div className="text-lg font-bold text-yellow-400">{analysisResults.salaryInsights.competitiveness}</div>
+                    <div className="text-lg font-bold text-yellow-400">
+                      {analysisResults.salaryInsights.competitiveness}
+                    </div>
                     <div className="text-gray-400 text-sm">Your Position</div>
                   </div>
                 </div>
@@ -593,13 +696,19 @@ Benefits:
                 Download Report
               </Button>
               <Link to="/resume-builder">
-                <Button variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+                <Button
+                  variant="outline"
+                  className="glass border-white/20 text-white hover:bg-white/10"
+                >
                   <FileText className="w-4 h-4 mr-2" />
                   Update Resume
                 </Button>
               </Link>
               <Link to="/cover-letter">
-                <Button variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+                <Button
+                  variant="outline"
+                  className="glass border-white/20 text-white hover:bg-white/10"
+                >
                   <Target className="w-4 h-4 mr-2" />
                   Generate Cover Letter
                 </Button>

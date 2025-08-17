@@ -1,14 +1,20 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { 
-  ArrowLeft, 
-  Settings as SettingsIcon, 
+import {
+  ArrowLeft,
+  Settings as SettingsIcon,
   User,
   Bell,
   Shield,
@@ -38,7 +44,7 @@ import {
   CheckCircle,
   AlertTriangle,
   Crown,
-  Star
+  Star,
 } from "lucide-react";
 
 export default function Settings() {
@@ -52,17 +58,53 @@ export default function Settings() {
 
   const settingsTabs = [
     { id: "profile", name: "Profile", icon: <User className="w-5 h-5" /> },
-    { id: "notifications", name: "Notifications", icon: <Bell className="w-5 h-5" /> },
-    { id: "privacy", name: "Privacy & Security", icon: <Shield className="w-5 h-5" /> },
-    { id: "billing", name: "Billing & Plan", icon: <CreditCard className="w-5 h-5" /> },
-    { id: "data", name: "Data Management", icon: <Download className="w-5 h-5" /> }
+    {
+      id: "notifications",
+      name: "Notifications",
+      icon: <Bell className="w-5 h-5" />,
+    },
+    {
+      id: "privacy",
+      name: "Privacy & Security",
+      icon: <Shield className="w-5 h-5" />,
+    },
+    {
+      id: "billing",
+      name: "Billing & Plan",
+      icon: <CreditCard className="w-5 h-5" />,
+    },
+    {
+      id: "data",
+      name: "Data Management",
+      icon: <Download className="w-5 h-5" />,
+    },
   ];
 
   const socialLinks = [
-    { platform: "LinkedIn", icon: <Linkedin className="w-5 h-5" />, url: "https://linkedin.com/in/johndoe", connected: true },
-    { platform: "GitHub", icon: <Github className="w-5 h-5" />, url: "https://github.com/johndoe", connected: true },
-    { platform: "Twitter", icon: <Twitter className="w-5 h-5" />, url: "", connected: false },
-    { platform: "Portfolio", icon: <Globe className="w-5 h-5" />, url: "https://johndoe.dev", connected: true }
+    {
+      platform: "LinkedIn",
+      icon: <Linkedin className="w-5 h-5" />,
+      url: "https://linkedin.com/in/johndoe",
+      connected: true,
+    },
+    {
+      platform: "GitHub",
+      icon: <Github className="w-5 h-5" />,
+      url: "https://github.com/johndoe",
+      connected: true,
+    },
+    {
+      platform: "Twitter",
+      icon: <Twitter className="w-5 h-5" />,
+      url: "",
+      connected: false,
+    },
+    {
+      platform: "Portfolio",
+      icon: <Globe className="w-5 h-5" />,
+      url: "https://johndoe.dev",
+      connected: true,
+    },
   ];
 
   const renderProfileTab = () => (
@@ -81,11 +123,18 @@ export default function Settings() {
               <User className="w-12 h-12 text-white" />
             </div>
             <div className="space-y-2">
-              <Button variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+              <Button
+                variant="outline"
+                className="glass border-white/20 text-white hover:bg-white/10"
+              >
                 <Upload className="w-4 h-4 mr-2" />
                 Upload Photo
               </Button>
-              <Button variant="outline" size="sm" className="glass border-white/20 text-white hover:bg-white/10">
+              <Button
+                variant="outline"
+                size="sm"
+                className="glass border-white/20 text-white hover:bg-white/10"
+              >
                 <Trash2 className="w-4 h-4 mr-2" />
                 Remove
               </Button>
@@ -94,14 +143,18 @@ export default function Settings() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-white font-medium mb-2">First Name</label>
+              <label className="block text-white font-medium mb-2">
+                First Name
+              </label>
               <Input
                 defaultValue="John"
                 className="glass border-white/20 text-white placeholder-gray-400 focus:ring-purple-500"
               />
             </div>
             <div>
-              <label className="block text-white font-medium mb-2">Last Name</label>
+              <label className="block text-white font-medium mb-2">
+                Last Name
+              </label>
               <Input
                 defaultValue="Smith"
                 className="glass border-white/20 text-white placeholder-gray-400 focus:ring-purple-500"
@@ -127,7 +180,9 @@ export default function Settings() {
               />
             </div>
             <div>
-              <label className="block text-white font-medium mb-2">Location</label>
+              <label className="block text-white font-medium mb-2">
+                Location
+              </label>
               <Input
                 defaultValue="San Francisco, CA"
                 className="glass border-white/20 text-white placeholder-gray-400 focus:ring-purple-500"
@@ -136,7 +191,9 @@ export default function Settings() {
           </div>
 
           <div>
-            <label className="block text-white font-medium mb-2">Professional Summary</label>
+            <label className="block text-white font-medium mb-2">
+              Professional Summary
+            </label>
             <Textarea
               defaultValue="Experienced software engineer with 5+ years in full-stack development. Passionate about creating scalable web applications and leading technical teams."
               className="glass border-white/20 text-white placeholder-gray-400 focus:ring-purple-500"
@@ -158,7 +215,10 @@ export default function Settings() {
         </CardHeader>
         <CardContent className="space-y-4">
           {socialLinks.map((link, index) => (
-            <div key={index} className="flex items-center space-x-4 p-4 glass rounded-lg border border-white/10">
+            <div
+              key={index}
+              className="flex items-center space-x-4 p-4 glass rounded-lg border border-white/10"
+            >
               <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                 {link.icon}
               </div>
@@ -177,7 +237,11 @@ export default function Settings() {
                     Connected
                   </Badge>
                 )}
-                <Button size="sm" variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="glass border-white/20 text-white hover:bg-white/10"
+                >
                   <ExternalLink className="w-4 h-4" />
                 </Button>
               </div>
@@ -208,31 +272,47 @@ export default function Settings() {
           <div className="flex items-center justify-between">
             <div>
               <div className="text-white font-medium">Email Notifications</div>
-              <div className="text-gray-400 text-sm">Receive updates via email</div>
+              <div className="text-gray-400 text-sm">
+                Receive updates via email
+              </div>
             </div>
-            <Switch checked={emailNotifications} onCheckedChange={setEmailNotifications} />
+            <Switch
+              checked={emailNotifications}
+              onCheckedChange={setEmailNotifications}
+            />
           </div>
 
           <div className="flex items-center justify-between">
             <div>
               <div className="text-white font-medium">Push Notifications</div>
-              <div className="text-gray-400 text-sm">Browser and mobile notifications</div>
+              <div className="text-gray-400 text-sm">
+                Browser and mobile notifications
+              </div>
             </div>
-            <Switch checked={pushNotifications} onCheckedChange={setPushNotifications} />
+            <Switch
+              checked={pushNotifications}
+              onCheckedChange={setPushNotifications}
+            />
           </div>
 
           <div className="flex items-center justify-between">
             <div>
               <div className="text-white font-medium">Job Alerts</div>
-              <div className="text-gray-400 text-sm">Get notified about matching jobs</div>
+              <div className="text-gray-400 text-sm">
+                Get notified about matching jobs
+              </div>
             </div>
             <Switch checked={jobAlerts} onCheckedChange={setJobAlerts} />
           </div>
 
           <div className="flex items-center justify-between">
             <div>
-              <div className="text-white font-medium">Weekly Progress Report</div>
-              <div className="text-gray-400 text-sm">Weekly summary of your activity</div>
+              <div className="text-white font-medium">
+                Weekly Progress Report
+              </div>
+              <div className="text-gray-400 text-sm">
+                Weekly summary of your activity
+              </div>
             </div>
             <Switch checked={weeklyReport} onCheckedChange={setWeeklyReport} />
           </div>
@@ -240,7 +320,9 @@ export default function Settings() {
           <div className="flex items-center justify-between">
             <div>
               <div className="text-white font-medium">Dark Mode</div>
-              <div className="text-gray-400 text-sm">Toggle dark/light theme</div>
+              <div className="text-gray-400 text-sm">
+                Toggle dark/light theme
+              </div>
             </div>
             <div className="flex items-center space-x-2">
               <Sun className="w-4 h-4 text-gray-400" />
@@ -264,7 +346,9 @@ export default function Settings() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <label className="block text-white font-medium mb-2">Current Password</label>
+            <label className="block text-white font-medium mb-2">
+              Current Password
+            </label>
             <div className="relative">
               <Input
                 type={showPassword ? "text" : "password"}
@@ -275,13 +359,19 @@ export default function Settings() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white"
               >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {showPassword ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
               </button>
             </div>
           </div>
 
           <div>
-            <label className="block text-white font-medium mb-2">New Password</label>
+            <label className="block text-white font-medium mb-2">
+              New Password
+            </label>
             <Input
               type="password"
               placeholder="Enter new password"
@@ -290,7 +380,9 @@ export default function Settings() {
           </div>
 
           <div>
-            <label className="block text-white font-medium mb-2">Confirm New Password</label>
+            <label className="block text-white font-medium mb-2">
+              Confirm New Password
+            </label>
             <Input
               type="password"
               placeholder="Confirm new password"
@@ -306,7 +398,9 @@ export default function Settings() {
 
       <Card className="glass border-white/20 bg-transparent">
         <CardHeader>
-          <CardTitle className="text-white">Two-Factor Authentication</CardTitle>
+          <CardTitle className="text-white">
+            Two-Factor Authentication
+          </CardTitle>
           <CardDescription className="text-gray-300">
             Add an extra layer of security to your account
           </CardDescription>
@@ -315,9 +409,14 @@ export default function Settings() {
           <div className="flex items-center justify-between">
             <div>
               <div className="text-white font-medium">Enable 2FA</div>
-              <div className="text-gray-400 text-sm">Secure your account with SMS or authenticator app</div>
+              <div className="text-gray-400 text-sm">
+                Secure your account with SMS or authenticator app
+              </div>
             </div>
-            <Button variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+            <Button
+              variant="outline"
+              className="glass border-white/20 text-white hover:bg-white/10"
+            >
               Setup 2FA
             </Button>
           </div>
@@ -339,7 +438,9 @@ export default function Settings() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <div className="text-2xl font-bold gradient-text">Pro Plan</div>
-              <div className="text-gray-400">$9.99/month • Renews on Jan 25, 2024</div>
+              <div className="text-gray-400">
+                $9.99/month • Renews on Jan 25, 2024
+              </div>
             </div>
             <Badge className="bg-yellow-500/20 text-yellow-300 border-yellow-500/30">
               <Star className="w-3 h-3 mr-1" />
@@ -367,10 +468,16 @@ export default function Settings() {
           </div>
 
           <div className="flex space-x-2">
-            <Button variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+            <Button
+              variant="outline"
+              className="glass border-white/20 text-white hover:bg-white/10"
+            >
               Change Plan
             </Button>
-            <Button variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+            <Button
+              variant="outline"
+              className="glass border-white/20 text-white hover:bg-white/10"
+            >
               Cancel Subscription
             </Button>
           </div>
@@ -388,11 +495,17 @@ export default function Settings() {
                 <CreditCard className="w-5 h-5 text-white" />
               </div>
               <div>
-                <div className="text-white font-medium">•••• •••• •••• 4242</div>
+                <div className="text-white font-medium">
+                  •••• •••• •••• 4242
+                </div>
                 <div className="text-gray-400 text-sm">Expires 12/25</div>
               </div>
             </div>
-            <Button size="sm" variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+            <Button
+              size="sm"
+              variant="outline"
+              className="glass border-white/20 text-white hover:bg-white/10"
+            >
               <Edit3 className="w-4 h-4" />
             </Button>
           </div>
@@ -408,18 +521,27 @@ export default function Settings() {
             {[
               { date: "Jan 25, 2024", amount: "$9.99", status: "Paid" },
               { date: "Dec 25, 2023", amount: "$9.99", status: "Paid" },
-              { date: "Nov 25, 2023", amount: "$9.99", status: "Paid" }
+              { date: "Nov 25, 2023", amount: "$9.99", status: "Paid" },
             ].map((invoice, index) => (
-              <div key={index} className="flex items-center justify-between p-3 glass rounded-lg border border-white/10">
+              <div
+                key={index}
+                className="flex items-center justify-between p-3 glass rounded-lg border border-white/10"
+              >
                 <div>
-                  <div className="text-white font-medium">${invoice.amount}</div>
+                  <div className="text-white font-medium">
+                    ${invoice.amount}
+                  </div>
                   <div className="text-gray-400 text-sm">{invoice.date}</div>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Badge className="bg-green-500/20 text-green-300 border-green-500/30">
                     {invoice.status}
                   </Badge>
-                  <Button size="sm" variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="glass border-white/20 text-white hover:bg-white/10"
+                  >
                     <Download className="w-4 h-4" />
                   </Button>
                 </div>
@@ -444,15 +566,24 @@ export default function Settings() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <Button variant="outline" className="w-full glass border-white/20 text-white hover:bg-white/10">
+          <Button
+            variant="outline"
+            className="w-full glass border-white/20 text-white hover:bg-white/10"
+          >
             <Download className="w-4 h-4 mr-2" />
             Export All Resumes (PDF)
           </Button>
-          <Button variant="outline" className="w-full glass border-white/20 text-white hover:bg-white/10">
+          <Button
+            variant="outline"
+            className="w-full glass border-white/20 text-white hover:bg-white/10"
+          >
             <Download className="w-4 h-4 mr-2" />
             Export Cover Letters (DOCX)
           </Button>
-          <Button variant="outline" className="w-full glass border-white/20 text-white hover:bg-white/10">
+          <Button
+            variant="outline"
+            className="w-full glass border-white/20 text-white hover:bg-white/10"
+          >
             <Download className="w-4 h-4 mr-2" />
             Export Application Data (JSON)
           </Button>
@@ -473,9 +604,13 @@ export default function Settings() {
           <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
             <div className="text-red-300 font-medium mb-2">Delete Account</div>
             <div className="text-gray-400 text-sm mb-4">
-              This will permanently delete your account and all associated data. This action cannot be undone.
+              This will permanently delete your account and all associated data.
+              This action cannot be undone.
             </div>
-            <Button variant="outline" className="border-red-500/30 text-red-300 hover:bg-red-500/20">
+            <Button
+              variant="outline"
+              className="border-red-500/30 text-red-300 hover:bg-red-500/20"
+            >
               <Trash2 className="w-4 h-4 mr-2" />
               Delete Account
             </Button>
@@ -487,12 +622,18 @@ export default function Settings() {
 
   const renderActiveTab = () => {
     switch (activeTab) {
-      case "profile": return renderProfileTab();
-      case "notifications": return renderNotificationsTab();
-      case "privacy": return renderPrivacyTab();
-      case "billing": return renderBillingTab();
-      case "data": return renderDataTab();
-      default: return renderProfileTab();
+      case "profile":
+        return renderProfileTab();
+      case "notifications":
+        return renderNotificationsTab();
+      case "privacy":
+        return renderPrivacyTab();
+      case "billing":
+        return renderBillingTab();
+      case "data":
+        return renderDataTab();
+      default:
+        return renderProfileTab();
     }
   };
 
@@ -509,7 +650,11 @@ export default function Settings() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link to="/dashboard">
-              <Button variant="outline" size="sm" className="glass border-white/20 text-white hover:bg-white/10">
+              <Button
+                variant="outline"
+                size="sm"
+                className="glass border-white/20 text-white hover:bg-white/10"
+              >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Dashboard
               </Button>
@@ -537,8 +682,8 @@ export default function Settings() {
                       onClick={() => setActiveTab(tab.id)}
                       className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all ${
                         activeTab === tab.id
-                          ? 'gradient-bg glow-effect text-white'
-                          : 'text-gray-300 hover:text-white hover:bg-white/5'
+                          ? "gradient-bg glow-effect text-white"
+                          : "text-gray-300 hover:text-white hover:bg-white/5"
                       }`}
                     >
                       {tab.icon}
@@ -551,9 +696,7 @@ export default function Settings() {
           </aside>
 
           {/* Main Content */}
-          <main className="flex-1">
-            {renderActiveTab()}
-          </main>
+          <main className="flex-1">{renderActiveTab()}</main>
         </div>
       </div>
     </div>

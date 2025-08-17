@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
-import { 
-  ArrowLeft, 
-  Sparkles, 
-  TrendingUp, 
+import {
+  ArrowLeft,
+  Sparkles,
+  TrendingUp,
   Plus,
   Building,
   MapPin,
@@ -33,7 +39,7 @@ import {
   BarChart3,
   Users,
   Briefcase,
-  Star
+  Star,
 } from "lucide-react";
 
 export default function CareerTracker() {
@@ -47,7 +53,7 @@ export default function CareerTracker() {
     { id: "applied", name: "Applied", count: 8, color: "bg-blue-500" },
     { id: "interview", name: "Interview", count: 5, color: "bg-yellow-500" },
     { id: "offer", name: "Offer", count: 2, color: "bg-green-500" },
-    { id: "rejected", name: "Rejected", count: 9, color: "bg-red-500" }
+    { id: "rejected", name: "Rejected", count: 9, color: "bg-red-500" },
   ];
 
   const applications = [
@@ -66,8 +72,8 @@ export default function CareerTracker() {
       notes: "Great company culture, excited about the role",
       contacts: [
         { name: "Sarah Johnson", role: "Recruiter", email: "sarah@google.com" },
-        { name: "Mike Chen", role: "Hiring Manager", email: "mike@google.com" }
-      ]
+        { name: "Mike Chen", role: "Hiring Manager", email: "mike@google.com" },
+      ],
     },
     {
       id: 2,
@@ -83,8 +89,12 @@ export default function CareerTracker() {
       priority: "high",
       notes: "Applied through LinkedIn, strong team match",
       contacts: [
-        { name: "Alex Rodriguez", role: "Recruiter", email: "alex@microsoft.com" }
-      ]
+        {
+          name: "Alex Rodriguez",
+          role: "Recruiter",
+          email: "alex@microsoft.com",
+        },
+      ],
     },
     {
       id: 3,
@@ -100,8 +110,8 @@ export default function CareerTracker() {
       priority: "high",
       notes: "Competitive offer, considering benefits package",
       contacts: [
-        { name: "Lisa Wang", role: "Hiring Manager", email: "lisa@amazon.com" }
-      ]
+        { name: "Lisa Wang", role: "Hiring Manager", email: "lisa@amazon.com" },
+      ],
     },
     {
       id: 4,
@@ -117,8 +127,8 @@ export default function CareerTracker() {
       priority: "medium",
       notes: "Great interview experience, good feedback for improvement",
       contacts: [
-        { name: "David Kim", role: "Tech Lead", email: "david@meta.com" }
-      ]
+        { name: "David Kim", role: "Tech Lead", email: "david@meta.com" },
+      ],
     },
     {
       id: 5,
@@ -134,51 +144,84 @@ export default function CareerTracker() {
       priority: "high",
       notes: "Innovative projects, great growth opportunities",
       contacts: [
-        { name: "Emma Davis", role: "Senior Recruiter", email: "emma@netflix.com" }
-      ]
-    }
+        {
+          name: "Emma Davis",
+          role: "Senior Recruiter",
+          email: "emma@netflix.com",
+        },
+      ],
+    },
   ];
 
-  const filteredApplications = applications.filter(app => {
-    const matchesSearch = app.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         app.position.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredApplications = applications.filter((app) => {
+    const matchesSearch =
+      app.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      app.position.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === "all" || app.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
   const stats = {
     totalApplications: applications.length,
-    responseRate: Math.round((applications.filter(app => app.status !== "applied").length / applications.length) * 100),
-    interviewRate: Math.round((applications.filter(app => app.status === "interview" || app.status === "offer").length / applications.length) * 100),
-    offerRate: Math.round((applications.filter(app => app.status === "offer").length / applications.length) * 100)
+    responseRate: Math.round(
+      (applications.filter((app) => app.status !== "applied").length /
+        applications.length) *
+        100,
+    ),
+    interviewRate: Math.round(
+      (applications.filter(
+        (app) => app.status === "interview" || app.status === "offer",
+      ).length /
+        applications.length) *
+        100,
+    ),
+    offerRate: Math.round(
+      (applications.filter((app) => app.status === "offer").length /
+        applications.length) *
+        100,
+    ),
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case "applied": return <Send className="w-4 h-4" />;
-      case "interview": return <Users className="w-4 h-4" />;
-      case "offer": return <CheckCircle className="w-4 h-4" />;
-      case "rejected": return <XCircle className="w-4 h-4" />;
-      default: return <FileText className="w-4 h-4" />;
+      case "applied":
+        return <Send className="w-4 h-4" />;
+      case "interview":
+        return <Users className="w-4 h-4" />;
+      case "offer":
+        return <CheckCircle className="w-4 h-4" />;
+      case "rejected":
+        return <XCircle className="w-4 h-4" />;
+      default:
+        return <FileText className="w-4 h-4" />;
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "applied": return "bg-blue-500/20 text-blue-300 border-blue-500/30";
-      case "interview": return "bg-yellow-500/20 text-yellow-300 border-yellow-500/30";
-      case "offer": return "bg-green-500/20 text-green-300 border-green-500/30";
-      case "rejected": return "bg-red-500/20 text-red-300 border-red-500/30";
-      default: return "bg-gray-500/20 text-gray-300 border-gray-500/30";
+      case "applied":
+        return "bg-blue-500/20 text-blue-300 border-blue-500/30";
+      case "interview":
+        return "bg-yellow-500/20 text-yellow-300 border-yellow-500/30";
+      case "offer":
+        return "bg-green-500/20 text-green-300 border-green-500/30";
+      case "rejected":
+        return "bg-red-500/20 text-red-300 border-red-500/30";
+      default:
+        return "bg-gray-500/20 text-gray-300 border-gray-500/30";
     }
   };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case "high": return "bg-red-500";
-      case "medium": return "bg-yellow-500";
-      case "low": return "bg-green-500";
-      default: return "bg-gray-500";
+      case "high":
+        return "bg-red-500";
+      case "medium":
+        return "bg-yellow-500";
+      case "low":
+        return "bg-green-500";
+      default:
+        return "bg-gray-500";
     }
   };
 
@@ -195,7 +238,11 @@ export default function CareerTracker() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link to="/dashboard">
-              <Button variant="outline" size="sm" className="glass border-white/20 text-white hover:bg-white/10">
+              <Button
+                variant="outline"
+                size="sm"
+                className="glass border-white/20 text-white hover:bg-white/10"
+              >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Dashboard
               </Button>
@@ -204,12 +251,14 @@ export default function CareerTracker() {
               <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center">
                 <TrendingUp className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold gradient-text">Career Tracker</span>
+              <span className="text-xl font-bold gradient-text">
+                Career Tracker
+              </span>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-2">
-            <Button 
+            <Button
               onClick={() => setShowAddJob(true)}
               className="gradient-bg glow-effect text-white border-0"
             >
@@ -225,25 +274,33 @@ export default function CareerTracker() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
           <Card className="glass border-white/20 bg-transparent">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold gradient-text">{stats.totalApplications}</div>
+              <div className="text-2xl font-bold gradient-text">
+                {stats.totalApplications}
+              </div>
               <div className="text-gray-400 text-sm">Total Applications</div>
             </CardContent>
           </Card>
           <Card className="glass border-white/20 bg-transparent">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold gradient-text">{stats.responseRate}%</div>
+              <div className="text-2xl font-bold gradient-text">
+                {stats.responseRate}%
+              </div>
               <div className="text-gray-400 text-sm">Response Rate</div>
             </CardContent>
           </Card>
           <Card className="glass border-white/20 bg-transparent">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold gradient-text">{stats.interviewRate}%</div>
+              <div className="text-2xl font-bold gradient-text">
+                {stats.interviewRate}%
+              </div>
               <div className="text-gray-400 text-sm">Interview Rate</div>
             </CardContent>
           </Card>
           <Card className="glass border-white/20 bg-transparent">
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold gradient-text">{stats.offerRate}%</div>
+              <div className="text-2xl font-bold gradient-text">
+                {stats.offerRate}%
+              </div>
               <div className="text-gray-400 text-sm">Offer Rate</div>
             </CardContent>
           </Card>
@@ -258,8 +315,8 @@ export default function CareerTracker() {
                 onClick={() => setStatusFilter(status.id)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
                   statusFilter === status.id
-                    ? 'gradient-bg glow-effect text-white'
-                    : 'glass border border-white/20 text-gray-300 hover:text-white hover:bg-white/5'
+                    ? "gradient-bg glow-effect text-white"
+                    : "glass border border-white/20 text-gray-300 hover:text-white hover:bg-white/5"
                 }`}
               >
                 <div className={`w-3 h-3 rounded-full ${status.color}`} />
@@ -283,11 +340,17 @@ export default function CareerTracker() {
               className="pl-10 glass border-white/20 text-white placeholder-gray-400 focus:ring-purple-500"
             />
           </div>
-          <Button variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+          <Button
+            variant="outline"
+            className="glass border-white/20 text-white hover:bg-white/10"
+          >
             <Filter className="w-4 h-4 mr-2" />
             Filters
           </Button>
-          <Button variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+          <Button
+            variant="outline"
+            className="glass border-white/20 text-white hover:bg-white/10"
+          >
             <Download className="w-4 h-4 mr-2" />
             Export
           </Button>
@@ -296,7 +359,10 @@ export default function CareerTracker() {
         {/* Applications List */}
         <div className="space-y-4">
           {filteredApplications.map((app) => (
-            <Card key={app.id} className="glass border-white/20 bg-transparent glow-hover">
+            <Card
+              key={app.id}
+              className="glass border-white/20 bg-transparent glow-hover"
+            >
               <CardContent className="p-6">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -306,7 +372,9 @@ export default function CareerTracker() {
                           <Building className="w-6 h-6 text-white" />
                         </div>
                         <div>
-                          <h3 className="text-white font-semibold text-lg">{app.company}</h3>
+                          <h3 className="text-white font-semibold text-lg">
+                            {app.company}
+                          </h3>
                           <p className="text-gray-300">{app.position}</p>
                           <div className="flex items-center space-x-4 text-sm text-gray-400 mt-1">
                             <span className="flex items-center space-x-1">
@@ -319,13 +387,18 @@ export default function CareerTracker() {
                             </span>
                             <span className="flex items-center space-x-1">
                               <Calendar className="w-4 h-4" />
-                              <span>Applied {new Date(app.appliedDate).toLocaleDateString()}</span>
+                              <span>
+                                Applied{" "}
+                                {new Date(app.appliedDate).toLocaleDateString()}
+                              </span>
                             </span>
                           </div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className={`w-3 h-3 rounded-full ${getPriorityColor(app.priority)}`} />
+                        <div
+                          className={`w-3 h-3 rounded-full ${getPriorityColor(app.priority)}`}
+                        />
                         <Badge className={getStatusColor(app.status)}>
                           {getStatusIcon(app.status)}
                           <span className="ml-1 capitalize">{app.status}</span>
@@ -335,17 +408,29 @@ export default function CareerTracker() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                       <div className="p-3 glass rounded-lg border border-white/10">
-                        <div className="text-sm text-gray-400 mb-1">Current Stage</div>
-                        <div className="text-white font-medium">{app.stage}</div>
-                      </div>
-                      <div className="p-3 glass rounded-lg border border-white/10">
-                        <div className="text-sm text-gray-400 mb-1">Next Step</div>
-                        <div className="text-white font-medium">{app.nextStep}</div>
-                      </div>
-                      <div className="p-3 glass rounded-lg border border-white/10">
-                        <div className="text-sm text-gray-400 mb-1">Next Date</div>
+                        <div className="text-sm text-gray-400 mb-1">
+                          Current Stage
+                        </div>
                         <div className="text-white font-medium">
-                          {app.nextDate ? new Date(app.nextDate).toLocaleDateString() : "TBD"}
+                          {app.stage}
+                        </div>
+                      </div>
+                      <div className="p-3 glass rounded-lg border border-white/10">
+                        <div className="text-sm text-gray-400 mb-1">
+                          Next Step
+                        </div>
+                        <div className="text-white font-medium">
+                          {app.nextStep}
+                        </div>
+                      </div>
+                      <div className="p-3 glass rounded-lg border border-white/10">
+                        <div className="text-sm text-gray-400 mb-1">
+                          Next Date
+                        </div>
+                        <div className="text-white font-medium">
+                          {app.nextDate
+                            ? new Date(app.nextDate).toLocaleDateString()
+                            : "TBD"}
                         </div>
                       </div>
                     </div>
@@ -359,16 +444,25 @@ export default function CareerTracker() {
 
                     {app.contacts && app.contacts.length > 0 && (
                       <div className="mb-4">
-                        <div className="text-sm text-gray-400 mb-2">Contacts</div>
+                        <div className="text-sm text-gray-400 mb-2">
+                          Contacts
+                        </div>
                         <div className="flex flex-wrap gap-2">
                           {app.contacts.map((contact, index) => (
-                            <div key={index} className="flex items-center space-x-2 p-2 glass rounded-lg border border-white/10">
+                            <div
+                              key={index}
+                              className="flex items-center space-x-2 p-2 glass rounded-lg border border-white/10"
+                            >
                               <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
                                 <Mail className="w-3 h-3 text-white" />
                               </div>
                               <div>
-                                <div className="text-white text-sm font-medium">{contact.name}</div>
-                                <div className="text-gray-400 text-xs">{contact.role}</div>
+                                <div className="text-white text-sm font-medium">
+                                  {contact.name}
+                                </div>
+                                <div className="text-gray-400 text-xs">
+                                  {contact.role}
+                                </div>
                               </div>
                             </div>
                           ))}
@@ -378,13 +472,25 @@ export default function CareerTracker() {
                   </div>
 
                   <div className="flex flex-col space-y-2 ml-4">
-                    <Button size="sm" variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="glass border-white/20 text-white hover:bg-white/10"
+                    >
                       <Eye className="w-4 h-4" />
                     </Button>
-                    <Button size="sm" variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="glass border-white/20 text-white hover:bg-white/10"
+                    >
                       <Edit3 className="w-4 h-4" />
                     </Button>
-                    <Button size="sm" variant="outline" className="glass border-white/20 text-white hover:bg-red-500/20 hover:border-red-500/30">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="glass border-white/20 text-white hover:bg-red-500/20 hover:border-red-500/30"
+                    >
                       <Trash2 className="w-4 h-4" />
                     </Button>
                   </div>
@@ -410,31 +516,39 @@ export default function CareerTracker() {
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-white font-medium mb-2">Company</label>
+                    <label className="block text-white font-medium mb-2">
+                      Company
+                    </label>
                     <Input
                       placeholder="Company name"
                       className="glass border-white/20 text-white placeholder-gray-400 focus:ring-purple-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-white font-medium mb-2">Position</label>
+                    <label className="block text-white font-medium mb-2">
+                      Position
+                    </label>
                     <Input
                       placeholder="Job title"
                       className="glass border-white/20 text-white placeholder-gray-400 focus:ring-purple-500"
                     />
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-white font-medium mb-2">Location</label>
+                    <label className="block text-white font-medium mb-2">
+                      Location
+                    </label>
                     <Input
                       placeholder="City, State"
                       className="glass border-white/20 text-white placeholder-gray-400 focus:ring-purple-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-white font-medium mb-2">Salary Range</label>
+                    <label className="block text-white font-medium mb-2">
+                      Salary Range
+                    </label>
                     <Input
                       placeholder="$80,000 - $100,000"
                       className="glass border-white/20 text-white placeholder-gray-400 focus:ring-purple-500"
@@ -444,7 +558,9 @@ export default function CareerTracker() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-white font-medium mb-2">Status</label>
+                    <label className="block text-white font-medium mb-2">
+                      Status
+                    </label>
                     <select className="w-full p-2 glass border-white/20 rounded-lg text-white bg-transparent focus:ring-purple-500">
                       <option value="applied">Applied</option>
                       <option value="interview">Interview</option>
@@ -453,7 +569,9 @@ export default function CareerTracker() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-white font-medium mb-2">Priority</label>
+                    <label className="block text-white font-medium mb-2">
+                      Priority
+                    </label>
                     <select className="w-full p-2 glass border-white/20 rounded-lg text-white bg-transparent focus:ring-purple-500">
                       <option value="high">High</option>
                       <option value="medium">Medium</option>
@@ -461,18 +579,20 @@ export default function CareerTracker() {
                     </select>
                   </div>
                 </div>
-                
+
                 <div>
-                  <label className="block text-white font-medium mb-2">Notes</label>
+                  <label className="block text-white font-medium mb-2">
+                    Notes
+                  </label>
                   <Textarea
                     placeholder="Add any notes about this application..."
                     className="glass border-white/20 text-white placeholder-gray-400 focus:ring-purple-500"
                   />
                 </div>
-                
+
                 <div className="flex justify-end space-x-2 pt-4">
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     onClick={() => setShowAddJob(false)}
                     className="glass border-white/20 text-white hover:bg-white/10"
                   >

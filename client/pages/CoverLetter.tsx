@@ -1,14 +1,20 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { 
-  ArrowLeft, 
-  Sparkles, 
-  MessageSquare, 
+import {
+  ArrowLeft,
+  Sparkles,
+  MessageSquare,
   Download,
   Copy,
   RefreshCw,
@@ -19,7 +25,7 @@ import {
   Target,
   CheckCircle,
   Clock,
-  Eye
+  Eye,
 } from "lucide-react";
 
 export default function CoverLetter() {
@@ -35,20 +41,23 @@ export default function CoverLetter() {
       id: "professional",
       name: "Professional",
       description: "Clean and formal for corporate positions",
-      preview: "Dear Hiring Manager,\n\nI am writing to express my strong interest in the [Position] role at [Company]..."
+      preview:
+        "Dear Hiring Manager,\n\nI am writing to express my strong interest in the [Position] role at [Company]...",
     },
     {
       id: "creative",
       name: "Creative",
       description: "Engaging and unique for creative roles",
-      preview: "Hello [Company] Team,\n\nI'm excited to apply for the [Position] opportunity and bring my passion..."
+      preview:
+        "Hello [Company] Team,\n\nI'm excited to apply for the [Position] opportunity and bring my passion...",
     },
     {
       id: "technical",
       name: "Technical",
       description: "Skills-focused for technical positions",
-      preview: "Dear [Hiring Manager],\n\nWith [X] years of experience in [Field], I am eager to contribute..."
-    }
+      preview:
+        "Dear [Hiring Manager],\n\nWith [X] years of experience in [Field], I am eager to contribute...",
+    },
   ];
 
   const recentLetters = [
@@ -57,22 +66,22 @@ export default function CoverLetter() {
       company: "Google",
       position: "Frontend Engineer",
       date: "2 hours ago",
-      status: "draft"
+      status: "draft",
     },
     {
       id: 2,
       company: "Microsoft",
       position: "Software Developer",
       date: "1 day ago",
-      status: "sent"
+      status: "sent",
     },
     {
       id: 3,
       company: "Amazon",
       position: "Full Stack Developer",
       date: "3 days ago",
-      status: "sent"
-    }
+      status: "sent",
+    },
   ];
 
   const generateLetter = async () => {
@@ -113,7 +122,11 @@ Sincerely,
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link to="/dashboard">
-              <Button variant="outline" size="sm" className="glass border-white/20 text-white hover:bg-white/10">
+              <Button
+                variant="outline"
+                size="sm"
+                className="glass border-white/20 text-white hover:bg-white/10"
+              >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Dashboard
               </Button>
@@ -122,10 +135,12 @@ Sincerely,
               <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
                 <MessageSquare className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold gradient-text">AI Cover Letter</span>
+              <span className="text-xl font-bold gradient-text">
+                AI Cover Letter
+              </span>
             </div>
           </div>
-          
+
           <div className="flex items-center space-x-2">
             <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">
               2 Letters Generated
@@ -150,18 +165,25 @@ Sincerely,
 
           <div className="space-y-3">
             {recentLetters.map((letter) => (
-              <Card key={letter.id} className="glass border-white/20 bg-transparent cursor-pointer glow-hover">
+              <Card
+                key={letter.id}
+                className="glass border-white/20 bg-transparent cursor-pointer glow-hover"
+              >
                 <CardContent className="p-4">
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <h3 className="text-white font-medium text-sm">{letter.company}</h3>
+                      <h3 className="text-white font-medium text-sm">
+                        {letter.company}
+                      </h3>
                       <p className="text-gray-400 text-xs">{letter.position}</p>
                     </div>
-                    <Badge className={`text-xs ${
-                      letter.status === 'sent' 
-                        ? 'bg-green-500/20 text-green-300 border-green-500/30'
-                        : 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30'
-                    }`}>
+                    <Badge
+                      className={`text-xs ${
+                        letter.status === "sent"
+                          ? "bg-green-500/20 text-green-300 border-green-500/30"
+                          : "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
+                      }`}
+                    >
                       {letter.status}
                     </Badge>
                   </div>
@@ -180,12 +202,14 @@ Sincerely,
                   onClick={() => setSelectedTemplate(template.id)}
                   className={`w-full text-left p-3 rounded-lg transition-all ${
                     selectedTemplate === template.id
-                      ? 'gradient-bg glow-effect text-white'
-                      : 'glass border border-white/10 text-gray-300 hover:text-white hover:bg-white/5'
+                      ? "gradient-bg glow-effect text-white"
+                      : "glass border border-white/10 text-gray-300 hover:text-white hover:bg-white/5"
                   }`}
                 >
                   <div className="font-medium text-sm">{template.name}</div>
-                  <div className="text-xs opacity-80">{template.description}</div>
+                  <div className="text-xs opacity-80">
+                    {template.description}
+                  </div>
                 </button>
               ))}
             </div>
@@ -198,9 +222,12 @@ Sincerely,
           <div className="w-1/2 p-6 border-r border-white/10">
             <div className="space-y-6">
               <div>
-                <h2 className="text-xl font-semibold text-white mb-4">Generate Your Cover Letter</h2>
+                <h2 className="text-xl font-semibold text-white mb-4">
+                  Generate Your Cover Letter
+                </h2>
                 <p className="text-gray-300 text-sm mb-6">
-                  Our AI will create a personalized cover letter based on the job details you provide.
+                  Our AI will create a personalized cover letter based on the
+                  job details you provide.
                 </p>
               </div>
 
@@ -290,11 +317,19 @@ Sincerely,
                 <h2 className="text-xl font-semibold text-white">Preview</h2>
                 {generatedLetter && (
                   <div className="flex space-x-2">
-                    <Button size="sm" variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="glass border-white/20 text-white hover:bg-white/10"
+                    >
                       <Copy className="w-4 h-4 mr-2" />
                       Copy
                     </Button>
-                    <Button size="sm" variant="outline" className="glass border-white/20 text-white hover:bg-white/10">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="glass border-white/20 text-white hover:bg-white/10"
+                    >
                       <Download className="w-4 h-4 mr-2" />
                       Download
                     </Button>
@@ -314,8 +349,12 @@ Sincerely,
                     <div className="h-full flex items-center justify-center text-center">
                       <div>
                         <Eye className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-                        <p className="text-gray-400">Your generated cover letter will appear here</p>
-                        <p className="text-gray-500 text-sm mt-2">Fill in the company and job details to get started</p>
+                        <p className="text-gray-400">
+                          Your generated cover letter will appear here
+                        </p>
+                        <p className="text-gray-500 text-sm mt-2">
+                          Fill in the company and job details to get started
+                        </p>
                       </div>
                     </div>
                   )}

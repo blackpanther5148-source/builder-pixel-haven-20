@@ -98,7 +98,7 @@ export default {
             transform: "translateY(-20px)",
           },
         },
-        "glow": {
+        glow: {
           "0%, 100%": {
             boxShadow: "0 0 20px rgba(102, 126, 234, 0.4)",
           },
@@ -106,7 +106,7 @@ export default {
             boxShadow: "0 0 40px rgba(118, 75, 162, 0.6)",
           },
         },
-        "float": {
+        float: {
           "0%, 100%": {
             transform: "translateY(0px)",
           },
@@ -114,7 +114,7 @@ export default {
             transform: "translateY(-10px)",
           },
         },
-        "typewriter": {
+        typewriter: {
           "0%": {
             width: "0%",
           },
@@ -127,15 +127,15 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "gradient-wave": "gradient-wave 6s ease-in-out infinite",
-        "glow": "glow 3s ease-in-out infinite",
-        "float": "float 4s ease-in-out infinite",
-        "typewriter": "typewriter 2s steps(40) infinite alternate",
+        glow: "glow 3s ease-in-out infinite",
+        float: "float 4s ease-in-out infinite",
+        typewriter: "typewriter 2s steps(40) infinite alternate",
       },
       backdropBlur: {
         xs: "2px",
       },
       fontFamily: {
-        sans: ['Inter', 'Poppins', 'system-ui', 'sans-serif'],
+        sans: ["Inter", "Poppins", "system-ui", "sans-serif"],
       },
     },
   },
