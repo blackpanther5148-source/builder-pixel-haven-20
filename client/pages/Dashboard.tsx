@@ -357,21 +357,35 @@ export default function Dashboard() {
               <span>Quick Actions</span>
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {quickActions.map((action, index) => (
-                <Card key={index} className="glass border-white/20 bg-transparent glow-hover cursor-pointer">
-                  <CardContent className="p-4">
-                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${action.gradient} flex items-center justify-center mb-3 glow-effect`}>
-                      {action.icon}
-                    </div>
-                    <h3 className="text-white font-medium mb-1">{action.title}</h3>
-                    <p className="text-gray-400 text-sm mb-3">{action.description}</p>
-                    <Button size="sm" variant="outline" className="w-full glass border-white/20 text-white hover:bg-white/10">
-                      {action.action}
-                      <ChevronRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+              {quickActions.map((action, index) => {
+                const getActionRoute = (title: string) => {
+                  switch (title) {
+                    case "Create Resume": return "/resume-builder";
+                    case "Generate Cover Letter": return "/cover-letter";
+                    case "Practice Interview": return "/interview-prep";
+                    case "Analyze Job Match": return "/job-match";
+                    default: return "/dashboard";
+                  }
+                };
+
+                return (
+                  <Link key={index} to={getActionRoute(action.title)}>
+                    <Card className="glass border-white/20 bg-transparent glow-hover cursor-pointer h-full">
+                      <CardContent className="p-4">
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${action.gradient} flex items-center justify-center mb-3 glow-effect`}>
+                          {action.icon}
+                        </div>
+                        <h3 className="text-white font-medium mb-1">{action.title}</h3>
+                        <p className="text-gray-400 text-sm mb-3">{action.description}</p>
+                        <Button size="sm" variant="outline" className="w-full glass border-white/20 text-white hover:bg-white/10">
+                          {action.action}
+                          <ChevronRight className="w-4 h-4 ml-2" />
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
