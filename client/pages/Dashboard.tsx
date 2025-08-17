@@ -173,9 +173,21 @@ export default function Dashboard() {
                 </div>
               );
 
-              if (item.id === 'resume') {
+              const getRoute = (id: string) => {
+                switch (id) {
+                  case 'resume': return '/resume-builder';
+                  case 'cover-letter': return '/cover-letter';
+                  case 'portfolio': return '/portfolio';
+                  case 'interview': return '/interview-prep';
+                  case 'career': return '/career-tracker';
+                  default: return null;
+                }
+              };
+
+              const route = getRoute(item.id);
+              if (route) {
                 return (
-                  <Link key={item.id} to="/resume-builder" onClick={() => setActiveTab(item.id)}>
+                  <Link key={item.id} to={route} onClick={() => setActiveTab(item.id)}>
                     {content}
                   </Link>
                 );
