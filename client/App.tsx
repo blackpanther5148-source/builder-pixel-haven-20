@@ -9,6 +9,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import ResumeBuilder from "./pages/ResumeBuilder";
+import CoverLetter from "./pages/CoverLetter";
+import Portfolio from "./pages/Portfolio";
+import InterviewPrep from "./pages/InterviewPrep";
+import CareerTracker from "./pages/CareerTracker";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +28,11 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/resume-builder" element={<ResumeBuilder />} />
+          <Route path="/cover-letter" element={<CoverLetter />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/interview-prep" element={<InterviewPrep />} />
+          <Route path="/career-tracker" element={<CareerTracker />} />
+          <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
