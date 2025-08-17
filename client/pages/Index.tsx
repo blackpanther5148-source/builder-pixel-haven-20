@@ -156,14 +156,18 @@ export default function Index() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Button size="lg" className="gradient-bg glow-effect text-white border-0 text-lg px-8 py-4 glow-hover">
-              <Sparkles className="w-5 h-5 mr-2" />
-              Build My Resume
-            </Button>
-            <Button size="lg" variant="outline" className="glass border-white/20 text-white hover:bg-white/10 text-lg px-8 py-4 glow-hover">
-              <Globe className="w-5 h-5 mr-2" />
-              Try Free Demo
-            </Button>
+            <Link to="/resume-builder">
+              <Button size="lg" className="gradient-bg glow-effect text-white border-0 text-lg px-8 py-4 glow-hover">
+                <Sparkles className="w-5 h-5 mr-2" />
+                Build My Resume
+              </Button>
+            </Link>
+            <Link to="/dashboard">
+              <Button size="lg" variant="outline" className="glass border-white/20 text-white hover:bg-white/10 text-lg px-8 py-4 glow-hover">
+                <Globe className="w-5 h-5 mr-2" />
+                Try Free Demo
+              </Button>
+            </Link>
           </div>
 
           {/* Stats */}
