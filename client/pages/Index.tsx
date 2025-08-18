@@ -425,15 +425,19 @@ export default function Index() {
                 <Moon className="w-5 h-5" />
               )}
             </button>
-            <Button
-              variant="outline"
-              className="glass border-white/20 text-white hover:bg-white/10"
-            >
-              Sign In
-            </Button>
-            <Button className="gradient-bg glow-effect text-white border-0">
-              Get Started
-            </Button>
+            <Link to="/login">
+              <Button
+                variant="outline"
+                className="glass border-white/20 text-white hover:bg-white/10"
+              >
+                Sign In
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button className="gradient-bg glow-effect text-white border-0">
+                Get Started
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
