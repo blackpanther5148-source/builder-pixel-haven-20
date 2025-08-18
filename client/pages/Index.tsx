@@ -461,16 +461,16 @@ export default function Index() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <Link to="/resume-builder">
+            <Link to="/signup">
               <Button
                 size="lg"
                 className="gradient-bg glow-effect text-white border-0 text-lg px-8 py-4 glow-hover"
               >
                 <Upload className="w-5 h-5 mr-2" />
-                Upload & Build Resume
+                Start Building Resume
               </Button>
             </Link>
-            <Link to="/dashboard">
+            <Link to="/resume-builder">
               <Button
                 size="lg"
                 variant="outline"
