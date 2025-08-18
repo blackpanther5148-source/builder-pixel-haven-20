@@ -58,6 +58,8 @@ import {
   Briefcase,
   GraduationCap,
   Share2,
+  User,
+  Loader2,
 } from "lucide-react";
 
 interface ResumeData {
