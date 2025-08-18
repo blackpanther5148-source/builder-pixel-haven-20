@@ -2,11 +2,13 @@
 // This integrates with your connected Context7 MCP server
 
 export class Context7HelpService {
-  
   /**
    * Get help content for a specific topic using Context7
    */
-  static async getHelpContent(topic: string, userQuery?: string): Promise<{
+  static async getHelpContent(
+    topic: string,
+    userQuery?: string,
+  ): Promise<{
     content: string;
     suggestions: string[];
     relatedTopics: string[];
@@ -15,24 +17,28 @@ export class Context7HelpService {
     try {
       // This would integrate with your Context7 MCP server
       // For now, providing structured help content based on topic
-      
+
       const helpContent = this.getTopicContent(topic, userQuery);
-      
+
       return {
         content: helpContent.content,
         suggestions: helpContent.suggestions,
         relatedTopics: helpContent.relatedTopics,
-        confidence: helpContent.confidence
+        confidence: helpContent.confidence,
       };
-      
     } catch (error) {
-      console.error('Context7 help service error:', error);
-      
+      console.error("Context7 help service error:", error);
+
       return {
-        content: "I'm sorry, I couldn't retrieve help information at the moment. Please try again later or contact support.",
-        suggestions: ["Contact support", "Check documentation", "Try again later"],
+        content:
+          "I'm sorry, I couldn't retrieve help information at the moment. Please try again later or contact support.",
+        suggestions: [
+          "Contact support",
+          "Check documentation",
+          "Try again later",
+        ],
         relatedTopics: [],
-        confidence: 0
+        confidence: 0,
       };
     }
   }
@@ -43,28 +49,35 @@ export class Context7HelpService {
   static async getContextualHelp(context: {
     page: string;
     action?: string;
-    userLevel?: 'beginner' | 'intermediate' | 'advanced';
+    userLevel?: "beginner" | "intermediate" | "advanced";
     previousActions?: string[];
   }): Promise<{
     content: string;
     tips: string[];
     nextSteps: string[];
   }> {
-    const { page, action, userLevel = 'intermediate' } = context;
-    
-    const contextualContent = this.getContextualContent(page, action, userLevel);
-    
+    const { page, action, userLevel = "intermediate" } = context;
+
+    const contextualContent = this.getContextualContent(
+      page,
+      action,
+      userLevel,
+    );
+
     return contextualContent;
   }
 
   /**
    * Search documentation and tutorials
    */
-  static async searchDocumentation(query: string, filters?: {
-    category?: string;
-    difficulty?: string;
-    format?: 'text' | 'video' | 'interactive';
-  }): Promise<{
+  static async searchDocumentation(
+    query: string,
+    filters?: {
+      category?: string;
+      difficulty?: string;
+      format?: "text" | "video" | "interactive";
+    },
+  ): Promise<{
     results: Array<{
       title: string;
       content: string;
@@ -77,21 +90,24 @@ export class Context7HelpService {
   }> {
     // This would integrate with Context7's search capabilities
     const mockResults = this.getMockSearchResults(query, filters);
-    
+
     return mockResults;
   }
 
   /**
    * Get topic-specific content
    */
-  private static getTopicContent(topic: string, userQuery?: string): {
+  private static getTopicContent(
+    topic: string,
+    userQuery?: string,
+  ): {
     content: string;
     suggestions: string[];
     relatedTopics: string[];
     confidence: number;
   } {
     const topicMap: Record<string, any> = {
-      'resume-building': {
+      "resume-building": {
         content: `# Resume Building Guide
 
 ## Getting Started
@@ -110,25 +126,25 @@ export class Context7HelpService {
 - **Keyword Optimization** - Suggests relevant keywords based on job descriptions
 - **Content Enhancement** - Improves bullet points and descriptions
 - **Format Checking** - Validates structure and formatting`,
-        
+
         suggestions: [
           "Start with uploading your current resume",
           "Use the AI suggestions to improve content",
           "Select an ATS-friendly template",
-          "Include measurable achievements"
+          "Include measurable achievements",
         ],
-        
+
         relatedTopics: [
           "cover-letter-writing",
           "job-matching",
           "interview-preparation",
-          "career-tracking"
+          "career-tracking",
         ],
-        
-        confidence: 95
+
+        confidence: 95,
       },
 
-      'cover-letter-writing': {
+      "cover-letter-writing": {
         content: `# Cover Letter Writing Guide
 
 ## AI-Powered Generation
@@ -156,19 +172,15 @@ Our AI can generate personalized cover letters by:
           "Use the job description analysis feature",
           "Customize for each application",
           "Include specific examples",
-          "Match the company's tone"
+          "Match the company's tone",
         ],
 
-        relatedTopics: [
-          "resume-building",
-          "job-matching",
-          "company-research"
-        ],
+        relatedTopics: ["resume-building", "job-matching", "company-research"],
 
-        confidence: 92
+        confidence: 92,
       },
 
-      'interview-preparation': {
+      "interview-preparation": {
         content: `# Interview Preparation Guide
 
 ## AI Mock Interviews
@@ -201,19 +213,19 @@ Structure your answers using:
           "Practice with AI mock interviews",
           "Research the company thoroughly",
           "Prepare STAR format examples",
-          "Practice your questions for them"
+          "Practice your questions for them",
         ],
 
         relatedTopics: [
           "company-research",
           "salary-negotiation",
-          "follow-up-strategies"
+          "follow-up-strategies",
         ],
 
-        confidence: 90
+        confidence: 90,
       },
 
-      'job-matching': {
+      "job-matching": {
         content: `# Job Matching & Analysis
 
 ## AI Job Match Analysis
@@ -240,104 +252,123 @@ Our tool analyzes:
           "Analyze multiple job postings",
           "Focus on improving top skill gaps",
           "Update resume based on analysis",
-          "Track your improvement over time"
+          "Track your improvement over time",
         ],
 
         relatedTopics: [
           "skill-development",
           "resume-optimization",
-          "career-planning"
+          "career-planning",
         ],
 
-        confidence: 88
-      }
+        confidence: 88,
+      },
     };
 
-    return topicMap[topic] || {
-      content: `Help content for "${topic}" is being prepared. Please check back soon or contact support for immediate assistance.`,
-      suggestions: ["Contact support", "Browse other help topics", "Check documentation"],
-      relatedTopics: ["general-help", "getting-started"],
-      confidence: 50
-    };
+    return (
+      topicMap[topic] || {
+        content: `Help content for "${topic}" is being prepared. Please check back soon or contact support for immediate assistance.`,
+        suggestions: [
+          "Contact support",
+          "Browse other help topics",
+          "Check documentation",
+        ],
+        relatedTopics: ["general-help", "getting-started"],
+        confidence: 50,
+      }
+    );
   }
 
   /**
    * Get contextual help based on current page/action
    */
-  private static getContextualContent(page: string, action?: string, userLevel?: string): {
+  private static getContextualContent(
+    page: string,
+    action?: string,
+    userLevel?: string,
+  ): {
     content: string;
     tips: string[];
     nextSteps: string[];
   } {
     const contextMap: Record<string, any> = {
-      'resume-builder': {
-        content: "You're in the Resume Builder. Here you can create, edit, and optimize your resume with AI assistance.",
+      "resume-builder": {
+        content:
+          "You're in the Resume Builder. Here you can create, edit, and optimize your resume with AI assistance.",
         tips: [
           "Save your work frequently",
           "Use the AI suggestions panel on the right",
           "Preview your resume before downloading",
-          "Try different templates to see what works best"
+          "Try different templates to see what works best",
         ],
         nextSteps: [
           "Complete all resume sections",
           "Review AI optimization suggestions",
           "Download and test with job applications",
-          "Generate matching cover letters"
-        ]
+          "Generate matching cover letters",
+        ],
       },
 
-      'cover-letter': {
-        content: "Generate personalized cover letters that complement your resume and target specific job opportunities.",
+      "cover-letter": {
+        content:
+          "Generate personalized cover letters that complement your resume and target specific job opportunities.",
         tips: [
           "Paste the job description for better personalization",
           "Review and edit the generated content",
           "Maintain consistency with your resume",
-          "Save successful letters as templates"
+          "Save successful letters as templates",
         ],
         nextSteps: [
           "Generate letter for your target job",
           "Customize the content",
           "Download in your preferred format",
-          "Track application success rates"
-        ]
+          "Track application success rates",
+        ],
       },
 
-      'job-match': {
-        content: "Analyze how well your profile matches specific job postings and get actionable improvement suggestions.",
+      "job-match": {
+        content:
+          "Analyze how well your profile matches specific job postings and get actionable improvement suggestions.",
         tips: [
           "Use complete job descriptions for accurate analysis",
           "Focus on improving high-impact skills first",
           "Track your match scores over time",
-          "Update your resume based on insights"
+          "Update your resume based on insights",
         ],
         nextSteps: [
           "Analyze multiple similar roles",
           "Address skill gaps through training",
           "Update resume with better keywords",
-          "Apply to roles with 80%+ match scores"
-        ]
-      }
+          "Apply to roles with 80%+ match scores",
+        ],
+      },
     };
 
-    return contextMap[page] || {
-      content: "Welcome to Profyle! This AI-powered platform helps you build better resumes, cover letters, and advance your career.",
-      tips: [
-        "Start with uploading or creating your resume",
-        "Use AI suggestions to improve your content",
-        "Track your job applications and progress"
-      ],
-      nextSteps: [
-        "Complete your profile",
-        "Build or upload your resume",
-        "Generate cover letters for target jobs"
-      ]
-    };
+    return (
+      contextMap[page] || {
+        content:
+          "Welcome to Profyle! This AI-powered platform helps you build better resumes, cover letters, and advance your career.",
+        tips: [
+          "Start with uploading or creating your resume",
+          "Use AI suggestions to improve your content",
+          "Track your job applications and progress",
+        ],
+        nextSteps: [
+          "Complete your profile",
+          "Build or upload your resume",
+          "Generate cover letters for target jobs",
+        ],
+      }
+    );
   }
 
   /**
    * Mock search results for documentation
    */
-  private static getMockSearchResults(query: string, filters?: any): {
+  private static getMockSearchResults(
+    query: string,
+    filters?: any,
+  ): {
     results: Array<{
       title: string;
       content: string;
@@ -351,37 +382,41 @@ Our tool analyzes:
     const allResults = [
       {
         title: "How to Create an ATS-Friendly Resume",
-        content: "Learn the key principles of creating resumes that pass applicant tracking systems...",
+        content:
+          "Learn the key principles of creating resumes that pass applicant tracking systems...",
         category: "Resume Building",
         difficulty: "Beginner",
-        relevanceScore: 0.95
+        relevanceScore: 0.95,
       },
       {
         title: "Advanced Cover Letter Personalization Techniques",
-        content: "Master the art of creating compelling, personalized cover letters...",
+        content:
+          "Master the art of creating compelling, personalized cover letters...",
         category: "Cover Letters",
         difficulty: "Advanced",
-        relevanceScore: 0.87
+        relevanceScore: 0.87,
       },
       {
         title: "Interview Question Database by Industry",
-        content: "Comprehensive collection of interview questions organized by industry and role type...",
+        content:
+          "Comprehensive collection of interview questions organized by industry and role type...",
         category: "Interview Prep",
         difficulty: "Intermediate",
-        relevanceScore: 0.82
-      }
+        relevanceScore: 0.82,
+      },
     ];
 
     // Filter results based on query relevance
-    const filteredResults = allResults.filter(result => 
-      result.title.toLowerCase().includes(query.toLowerCase()) ||
-      result.content.toLowerCase().includes(query.toLowerCase()) ||
-      result.category.toLowerCase().includes(query.toLowerCase())
+    const filteredResults = allResults.filter(
+      (result) =>
+        result.title.toLowerCase().includes(query.toLowerCase()) ||
+        result.content.toLowerCase().includes(query.toLowerCase()) ||
+        result.category.toLowerCase().includes(query.toLowerCase()),
     );
 
     return {
       results: filteredResults,
-      totalFound: filteredResults.length
+      totalFound: filteredResults.length,
     };
   }
 }

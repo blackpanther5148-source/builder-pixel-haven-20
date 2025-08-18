@@ -103,20 +103,34 @@ export default function Signup() {
     };
 
     strength = Object.values(checks).filter(Boolean).length;
-    
+
     return {
       score: strength,
       checks,
-      label: strength <= 2 ? "Weak" : strength <= 3 ? "Fair" : strength <= 4 ? "Good" : "Strong",
-      color: strength <= 2 ? "text-red-400" : strength <= 3 ? "text-yellow-400" : strength <= 4 ? "text-blue-400" : "text-green-400",
+      label:
+        strength <= 2
+          ? "Weak"
+          : strength <= 3
+            ? "Fair"
+            : strength <= 4
+              ? "Good"
+              : "Strong",
+      color:
+        strength <= 2
+          ? "text-red-400"
+          : strength <= 3
+            ? "text-yellow-400"
+            : strength <= 4
+              ? "text-blue-400"
+              : "text-green-400",
     };
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     setIsLoading(true);
     setError("");
 
@@ -147,12 +161,11 @@ export default function Signup() {
       localStorage.setItem("user", JSON.stringify(data.user));
 
       setSuccess("Account created successfully! Redirecting...");
-      
+
       // Redirect to dashboard after a brief delay
       setTimeout(() => {
         navigate("/dashboard");
       }, 1500);
-
     } catch (err: any) {
       setError(err.message || "An error occurred during registration");
     } finally {
@@ -241,7 +254,7 @@ export default function Signup() {
                   />
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="lastName" className="text-white font-medium">
                   Last Name
@@ -299,7 +312,7 @@ export default function Signup() {
                   />
                 </div>
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="location" className="text-white font-medium">
                   Location (Optional)
@@ -347,12 +360,16 @@ export default function Signup() {
                   )}
                 </button>
               </div>
-              
+
               {formData.password && (
                 <div className="mt-2">
                   <div className="flex justify-between items-center mb-1">
-                    <span className="text-sm text-gray-300">Password strength:</span>
-                    <span className={`text-sm font-medium ${passwordStrength.color}`}>
+                    <span className="text-sm text-gray-300">
+                      Password strength:
+                    </span>
+                    <span
+                      className={`text-sm font-medium ${passwordStrength.color}`}
+                    >
                       {passwordStrength.label}
                     </span>
                   </div>
@@ -361,14 +378,14 @@ export default function Signup() {
                       <div
                         key={i}
                         className={`h-1 rounded-full ${
-                          i < passwordStrength.score 
-                            ? passwordStrength.score <= 2 
-                              ? "bg-red-400" 
-                              : passwordStrength.score <= 3 
-                              ? "bg-yellow-400" 
-                              : passwordStrength.score <= 4 
-                              ? "bg-blue-400" 
-                              : "bg-green-400"
+                          i < passwordStrength.score
+                            ? passwordStrength.score <= 2
+                              ? "bg-red-400"
+                              : passwordStrength.score <= 3
+                                ? "bg-yellow-400"
+                                : passwordStrength.score <= 4
+                                  ? "bg-blue-400"
+                                  : "bg-green-400"
                             : "bg-gray-600"
                         }`}
                       />
@@ -376,8 +393,12 @@ export default function Signup() {
                   </div>
                   <div className="text-xs text-gray-400 space-y-1">
                     <div className="flex items-center space-x-2">
-                      <div className={`w-3 h-3 rounded-full ${passwordStrength.checks.length ? "bg-green-500" : "bg-gray-600"}`}>
-                        {passwordStrength.checks.length && <Check className="w-2 h-2 text-white m-0.5" />}
+                      <div
+                        className={`w-3 h-3 rounded-full ${passwordStrength.checks.length ? "bg-green-500" : "bg-gray-600"}`}
+                      >
+                        {passwordStrength.checks.length && (
+                          <Check className="w-2 h-2 text-white m-0.5" />
+                        )}
                       </div>
                       <span>At least 8 characters</span>
                     </div>
@@ -387,7 +408,10 @@ export default function Signup() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="confirmPassword" className="text-white font-medium">
+              <Label
+                htmlFor="confirmPassword"
+                className="text-white font-medium"
+              >
                 Confirm Password
               </Label>
               <div className="relative">
@@ -424,13 +448,22 @@ export default function Signup() {
                 onChange={(e) => setAgreedToTerms(e.target.checked)}
                 className="rounded border-gray-600 bg-transparent text-purple-500 focus:ring-purple-500 mt-1"
               />
-              <label htmlFor="terms" className="text-sm text-gray-300 leading-relaxed">
+              <label
+                htmlFor="terms"
+                className="text-sm text-gray-300 leading-relaxed"
+              >
                 I agree to the{" "}
-                <Link to="/terms" className="text-purple-400 hover:text-purple-300">
+                <Link
+                  to="/terms"
+                  className="text-purple-400 hover:text-purple-300"
+                >
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link to="/privacy" className="text-purple-400 hover:text-purple-300">
+                <Link
+                  to="/privacy"
+                  className="text-purple-400 hover:text-purple-300"
+                >
                   Privacy Policy
                 </Link>
               </label>
@@ -492,8 +525,12 @@ export default function Signup() {
               variant="outline"
               className="glass border-white/20 text-white hover:bg-white/10"
             >
-              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.403.041-3.439.219-.937 1.219-5.160 1.219-5.160s-.312-.623-.312-1.543c0-1.446.838-2.525 1.881-2.525.888 0 1.315.666 1.315 1.466 0 .893-.568 2.228-.861 3.467-.245 1.038.52 1.884 1.543 1.884 1.854 0 3.279-1.954 3.279-4.776 0-2.499-1.798-4.248-4.364-4.248-2.973 0-4.716 2.23-4.716 4.534 0 .897.346 1.861.778 2.383.085.104.098.195.072.301-.079.329-.255 1.035-.289 1.18-.043.184-.142.223-.327.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.29-1.155l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z"/>
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.024-.105-.949-.199-2.403.041-3.439.219-.937 1.219-5.160 1.219-5.160s-.312-.623-.312-1.543c0-1.446.838-2.525 1.881-2.525.888 0 1.315.666 1.315 1.466 0 .893-.568 2.228-.861 3.467-.245 1.038.52 1.884 1.543 1.884 1.854 0 3.279-1.954 3.279-4.776 0-2.499-1.798-4.248-4.364-4.248-2.973 0-4.716 2.23-4.716 4.534 0 .897.346 1.861.778 2.383.085.104.098.195.072.301-.079.329-.255 1.035-.289 1.18-.043.184-.142.223-.327.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.966-.527-2.29-1.155l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 6.624 0 11.99-5.367 11.99-11.987C24.007 5.367 18.641.001 12.017.001z" />
               </svg>
               LinkedIn
             </Button>

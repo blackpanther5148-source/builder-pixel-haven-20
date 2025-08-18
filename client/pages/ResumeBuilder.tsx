@@ -178,8 +178,10 @@ export default function ResumeBuilder() {
       website: "johnsmi.th",
       linkedin: "linkedin.com/in/johnsmith",
       github: "github.com/johnsmith",
-      summary: "Experienced software engineer with 5+ years in full-stack development. Passionate about creating scalable web applications and leading technical teams.",
-      profileImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+      summary:
+        "Experienced software engineer with 5+ years in full-stack development. Passionate about creating scalable web applications and leading technical teams.",
+      profileImage:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
     },
     experience: [
       {
@@ -190,7 +192,8 @@ export default function ResumeBuilder() {
         startDate: "2021-01",
         endDate: "",
         current: true,
-        description: "Lead development of scalable web applications using React and Node.js",
+        description:
+          "Lead development of scalable web applications using React and Node.js",
         achievements: [
           "Improved application performance by 40% through optimization",
           "Led a team of 4 developers on critical product features",
@@ -210,7 +213,12 @@ export default function ResumeBuilder() {
         endDate: "2019-05",
         gpa: "3.8",
         honors: "Magna Cum Laude",
-        coursework: ["Data Structures", "Algorithms", "Software Engineering", "Database Systems"],
+        coursework: [
+          "Data Structures",
+          "Algorithms",
+          "Software Engineering",
+          "Database Systems",
+        ],
         thesis: "Machine Learning Applications in Web Development",
       },
     ],
@@ -238,7 +246,8 @@ export default function ResumeBuilder() {
       {
         id: "1",
         name: "E-commerce Platform",
-        description: "Full-stack e-commerce solution with React, Node.js, and PostgreSQL",
+        description:
+          "Full-stack e-commerce solution with React, Node.js, and PostgreSQL",
         technologies: ["React", "Node.js", "PostgreSQL", "Stripe"],
         link: "https://demo.com",
         github: "https://github.com/user/project",
@@ -267,7 +276,8 @@ export default function ResumeBuilder() {
       {
         id: "1",
         title: "Employee of the Year",
-        description: "Recognized for outstanding performance and leadership in software development",
+        description:
+          "Recognized for outstanding performance and leadership in software development",
         date: "2023-12",
         organization: "Tech Corp",
       },
@@ -291,7 +301,8 @@ export default function ResumeBuilder() {
         publisher: "Tech Journal",
         date: "2023-08",
         url: "https://techjournal.com/article",
-        description: "A comprehensive guide to modern web development techniques and best practices",
+        description:
+          "A comprehensive guide to modern web development techniques and best practices",
       },
     ],
     volunteering: [
@@ -302,7 +313,8 @@ export default function ResumeBuilder() {
         startDate: "2022-01",
         endDate: "",
         current: true,
-        description: "Developing civic technology solutions for local communities",
+        description:
+          "Developing civic technology solutions for local communities",
       },
     ],
   });
@@ -321,25 +333,29 @@ export default function ResumeBuilder() {
       id: "modern",
       name: "Modern",
       description: "Clean and contemporary design",
-      preview: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=400",
+      preview:
+        "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=400",
     },
     {
       id: "classic",
       name: "Classic",
       description: "Traditional professional layout",
-      preview: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=400",
+      preview:
+        "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=400",
     },
     {
       id: "creative",
       name: "Creative",
       description: "Unique design for creative roles",
-      preview: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=400",
+      preview:
+        "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=400",
     },
     {
       id: "minimal",
       name: "Minimal",
       description: "Simple and clean aesthetic",
-      preview: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=400",
+      preview:
+        "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=300&h=400",
     },
   ];
 
@@ -408,7 +424,7 @@ export default function ResumeBuilder() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify({
           resumeData,
@@ -819,9 +835,9 @@ export default function ResumeBuilder() {
                         setResumeData({
                           ...resumeData,
                           education: resumeData.education.map((item) =>
-                            item.id === edu.id 
+                            item.id === edu.id
                               ? { ...item, institution: e.target.value }
-                              : item
+                              : item,
                           ),
                         })
                       }
@@ -838,9 +854,9 @@ export default function ResumeBuilder() {
                         setResumeData({
                           ...resumeData,
                           education: resumeData.education.map((item) =>
-                            item.id === edu.id 
+                            item.id === edu.id
                               ? { ...item, degree: e.target.value }
-                              : item
+                              : item,
                           ),
                         })
                       }
@@ -859,9 +875,9 @@ export default function ResumeBuilder() {
                         setResumeData({
                           ...resumeData,
                           education: resumeData.education.map((item) =>
-                            item.id === edu.id 
+                            item.id === edu.id
                               ? { ...item, field: e.target.value }
-                              : item
+                              : item,
                           ),
                         })
                       }
@@ -878,9 +894,9 @@ export default function ResumeBuilder() {
                         setResumeData({
                           ...resumeData,
                           education: resumeData.education.map((item) =>
-                            item.id === edu.id 
+                            item.id === edu.id
                               ? { ...item, gpa: e.target.value }
-                              : item
+                              : item,
                           ),
                         })
                       }
@@ -898,9 +914,9 @@ export default function ResumeBuilder() {
                         setResumeData({
                           ...resumeData,
                           education: resumeData.education.map((item) =>
-                            item.id === edu.id 
+                            item.id === edu.id
                               ? { ...item, honors: e.target.value }
-                              : item
+                              : item,
                           ),
                         })
                       }
@@ -949,9 +965,9 @@ export default function ResumeBuilder() {
                         setResumeData({
                           ...resumeData,
                           projects: resumeData.projects.map((item) =>
-                            item.id === project.id 
+                            item.id === project.id
                               ? { ...item, name: e.target.value }
-                              : item
+                              : item,
                           ),
                         })
                       }
@@ -968,9 +984,9 @@ export default function ResumeBuilder() {
                         setResumeData({
                           ...resumeData,
                           projects: resumeData.projects.map((item) =>
-                            item.id === project.id 
+                            item.id === project.id
                               ? { ...item, link: e.target.value }
-                              : item
+                              : item,
                           ),
                         })
                       }
@@ -989,9 +1005,9 @@ export default function ResumeBuilder() {
                       setResumeData({
                         ...resumeData,
                         projects: resumeData.projects.map((item) =>
-                          item.id === project.id 
+                          item.id === project.id
                             ? { ...item, description: e.target.value }
-                            : item
+                            : item,
                         ),
                       })
                     }
@@ -1038,10 +1054,11 @@ export default function ResumeBuilder() {
                       onChange={(e) =>
                         setResumeData({
                           ...resumeData,
-                          certifications: resumeData.certifications.map((item) =>
-                            item.id === cert.id 
-                              ? { ...item, name: e.target.value }
-                              : item
+                          certifications: resumeData.certifications.map(
+                            (item) =>
+                              item.id === cert.id
+                                ? { ...item, name: e.target.value }
+                                : item,
                           ),
                         })
                       }
@@ -1057,10 +1074,11 @@ export default function ResumeBuilder() {
                       onChange={(e) =>
                         setResumeData({
                           ...resumeData,
-                          certifications: resumeData.certifications.map((item) =>
-                            item.id === cert.id 
-                              ? { ...item, issuer: e.target.value }
-                              : item
+                          certifications: resumeData.certifications.map(
+                            (item) =>
+                              item.id === cert.id
+                                ? { ...item, issuer: e.target.value }
+                                : item,
                           ),
                         })
                       }
@@ -1079,10 +1097,11 @@ export default function ResumeBuilder() {
                       onChange={(e) =>
                         setResumeData({
                           ...resumeData,
-                          certifications: resumeData.certifications.map((item) =>
-                            item.id === cert.id 
-                              ? { ...item, date: e.target.value }
-                              : item
+                          certifications: resumeData.certifications.map(
+                            (item) =>
+                              item.id === cert.id
+                                ? { ...item, date: e.target.value }
+                                : item,
                           ),
                         })
                       }
@@ -1098,10 +1117,11 @@ export default function ResumeBuilder() {
                       onChange={(e) =>
                         setResumeData({
                           ...resumeData,
-                          certifications: resumeData.certifications.map((item) =>
-                            item.id === cert.id 
-                              ? { ...item, credentialId: e.target.value }
-                              : item
+                          certifications: resumeData.certifications.map(
+                            (item) =>
+                              item.id === cert.id
+                                ? { ...item, credentialId: e.target.value }
+                                : item,
                           ),
                         })
                       }
@@ -1304,7 +1324,9 @@ export default function ResumeBuilder() {
                         <h3 className="font-semibold text-gray-800 text-lg">
                           {exp.position}
                         </h3>
-                        <p className="text-blue-600 font-medium">{exp.company}</p>
+                        <p className="text-blue-600 font-medium">
+                          {exp.company}
+                        </p>
                       </div>
                       <div className="text-right text-gray-600 text-sm">
                         <p className="font-medium">
@@ -1358,7 +1380,9 @@ export default function ResumeBuilder() {
                         )}
                       </div>
                       <div className="text-right text-gray-600 text-sm">
-                        <p>{edu.startDate} - {edu.endDate}</p>
+                        <p>
+                          {edu.startDate} - {edu.endDate}
+                        </p>
                         {edu.gpa && <p>GPA: {edu.gpa}</p>}
                       </div>
                     </div>
@@ -1387,7 +1411,9 @@ export default function ResumeBuilder() {
                           </a>
                         )}
                       </div>
-                      <p className="text-gray-700 mb-2">{project.description}</p>
+                      <p className="text-gray-700 mb-2">
+                        {project.description}
+                      </p>
                       {project.technologies.length > 0 && (
                         <div className="flex flex-wrap gap-2">
                           {project.technologies.map((tech, idx) => (
@@ -1472,7 +1498,7 @@ export default function ResumeBuilder() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Button 
+            <Button
               onClick={handleDownloadPDF}
               disabled={isDownloading}
               className="w-full gradient-bg glow-effect text-white border-0"

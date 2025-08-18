@@ -32,7 +32,10 @@ if (process.env.SENTRY_DSN) {
 // Database connection
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
@@ -41,12 +44,15 @@ const pool = new Pool({
 // Configure multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname),
+    );
+  },
 });
 
 const upload = multer({
@@ -57,17 +63,21 @@ const upload = multer({
   fileFilter: (req, file, cb) => {
     // Allow only PDF, DOC, DOCX files
     const allowedTypes = [
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      "application/pdf",
+      "application/msword",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
     ];
-    
+
     if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error('Invalid file type. Only PDF, DOC, and DOCX files are allowed.'));
+      cb(
+        new Error(
+          "Invalid file type. Only PDF, DOC, and DOCX files are allowed.",
+        ),
+      );
     }
-  }
+  },
 });
 
 export function createServer() {
@@ -83,15 +93,17 @@ export function createServer() {
   app.use(securityMiddleware);
 
   // Core middleware
-  app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
-    credentials: true,
-  }));
-  app.use(express.json({ limit: '50mb' }));
-  app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+  app.use(
+    cors({
+      origin: process.env.FRONTEND_URL || "http://localhost:3000",
+      credentials: true,
+    }),
+  );
+  app.use(express.json({ limit: "50mb" }));
+  app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
   // Static file serving for uploads
-  app.use('/uploads', express.static('uploads'));
+  app.use("/uploads", express.static("uploads"));
 
   // Database connection middleware
   app.use((req: any, res, next) => {
@@ -103,19 +115,19 @@ export function createServer() {
   app.get("/api/health", async (req: any, res) => {
     try {
       // Test database connection
-      const result = await req.db.query('SELECT NOW()');
-      res.json({ 
-        status: 'healthy', 
+      const result = await req.db.query("SELECT NOW()");
+      res.json({
+        status: "healthy",
         timestamp: result.rows[0].now,
-        database: 'connected',
-        environment: process.env.NODE_ENV || 'development'
+        database: "connected",
+        environment: process.env.NODE_ENV || "development",
       });
     } catch (error) {
-      console.error('Health check failed:', error);
+      console.error("Health check failed:", error);
       Sentry.captureException(error);
-      res.status(500).json({ 
-        status: 'unhealthy', 
-        error: 'Database connection failed' 
+      res.status(500).json({
+        status: "unhealthy",
+        error: "Database connection failed",
       });
     }
   });
@@ -140,10 +152,10 @@ export function createServer() {
   app.use("/api/analytics", analyticsRoutes);
 
   // File upload endpoint with security scanning
-  app.post("/api/upload", upload.single('file'), async (req: any, res) => {
+  app.post("/api/upload", upload.single("file"), async (req: any, res) => {
     try {
       if (!req.file) {
-        return res.status(400).json({ error: 'No file uploaded' });
+        return res.status(400).json({ error: "No file uploaded" });
       }
 
       // Store file information in database
@@ -159,29 +171,34 @@ export function createServer() {
       const result = await req.db.query(
         `INSERT INTO file_uploads (user_id, original_filename, stored_filename, file_type, file_size, file_path)
          VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`,
-        [fileData.user_id, fileData.original_filename, fileData.stored_filename, 
-         fileData.file_type, fileData.file_size, fileData.file_path]
+        [
+          fileData.user_id,
+          fileData.original_filename,
+          fileData.stored_filename,
+          fileData.file_type,
+          fileData.file_size,
+          fileData.file_path,
+        ],
       );
 
       // Trigger security scan (async)
       // This will be implemented with Semgrep integration
-      
+
       res.json({
         success: true,
         file_id: result.rows[0].id,
-        message: 'File uploaded successfully',
+        message: "File uploaded successfully",
         file: {
           id: result.rows[0].id,
           original_name: req.file.originalname,
           size: req.file.size,
-          type: req.file.mimetype
-        }
+          type: req.file.mimetype,
+        },
       });
-
     } catch (error) {
-      console.error('File upload error:', error);
+      console.error("File upload error:", error);
       Sentry.captureException(error);
-      res.status(500).json({ error: 'File upload failed' });
+      res.status(500).json({ error: "File upload failed" });
     }
   });
 
@@ -189,17 +206,17 @@ export function createServer() {
   app.get("/api/help", async (req, res) => {
     try {
       const { topic } = req.query;
-      
+
       // This will integrate with Context7 MCP for documentation
       res.json({
-        topic: topic || 'general',
-        help_content: 'Context7 integration coming soon',
-        suggestions: []
+        topic: topic || "general",
+        help_content: "Context7 integration coming soon",
+        suggestions: [],
       });
     } catch (error) {
-      console.error('Help API error:', error);
+      console.error("Help API error:", error);
       Sentry.captureException(error);
-      res.status(500).json({ error: 'Help service unavailable' });
+      res.status(500).json({ error: "Help service unavailable" });
     }
   });
 
@@ -207,25 +224,25 @@ export function createServer() {
   if (process.env.SENTRY_DSN) {
     app.use(Sentry.Handlers.errorHandler());
   }
-  
+
   app.use(errorHandler);
 
   return app;
 }
 
 // Handle graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('SIGTERM received, shutting down gracefully');
+process.on("SIGTERM", () => {
+  console.log("SIGTERM received, shutting down gracefully");
   pool.end(() => {
-    console.log('Database pool closed');
+    console.log("Database pool closed");
     process.exit(0);
   });
 });
 
-process.on('SIGINT', () => {
-  console.log('SIGINT received, shutting down gracefully');
+process.on("SIGINT", () => {
+  console.log("SIGINT received, shutting down gracefully");
   pool.end(() => {
-    console.log('Database pool closed');
+    console.log("Database pool closed");
     process.exit(0);
   });
 });

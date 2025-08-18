@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { isAuthenticated, getUser, clearAuth, type User } from '@/lib/auth';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated, getUser, clearAuth, type User } from "@/lib/auth";
 
 export const useAuth = (requireAuth: boolean = false) => {
   const [user, setUser] = useState<User | null>(null);
@@ -15,7 +15,7 @@ export const useAuth = (requireAuth: boolean = false) => {
       } else {
         setUser(null);
         if (requireAuth) {
-          navigate('/login');
+          navigate("/login");
         }
       }
       setLoading(false);
@@ -27,7 +27,7 @@ export const useAuth = (requireAuth: boolean = false) => {
   const logout = () => {
     clearAuth();
     setUser(null);
-    navigate('/');
+    navigate("/");
   };
 
   return {
