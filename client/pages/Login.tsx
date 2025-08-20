@@ -22,6 +22,7 @@ import {
   CheckCircle,
   Loader2,
 } from "lucide-react";
+import { setAuth } from "@/lib/auth";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -84,8 +85,7 @@ export default function Login() {
       }
 
       // Store token and user data
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      setAuth(data.token, data.user);
 
       setSuccess("Login successful! Redirecting...");
 

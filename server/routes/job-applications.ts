@@ -92,7 +92,7 @@ router.get(
 
       const countResult = await req.db.query(
         `SELECT COUNT(*) FROM job_applications ja ${whereClause}`,
-        queryParams.slice(0, -2), // Remove limit and offset for count
+        queryParams, // Use the same params as the main query, but without limit/offset
       );
 
       res.json({
@@ -195,7 +195,7 @@ router.get(
       }
 
       const contactsResult = await req.db.query(
-        "SELECT * FROM job_contacts WHERE application_id = $1 ORDER BY created_at",
+        "SELECT * FROM job_contacts WHERE job_application_id = $1 ORDER BY created_at",
         [applicationId],
       );
 
@@ -223,7 +223,7 @@ router.get(
           contacts: contactsResult.rows.map((contact) => ({
             id: contact.id,
             name: contact.name,
-            role: contact.role,
+            title: contact.title,
             email: contact.email,
             phone: contact.phone,
             linkedinUrl: contact.linkedin_url,
@@ -431,7 +431,7 @@ router.post(
 
       const result = await req.db.query(
         `INSERT INTO job_contacts 
-       (application_id, name, role, email, phone, linkedin_url, notes)
+       (job_application_id, name, title, email, phone, linkedin_url, notes)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
        RETURNING *`,
         [
@@ -451,7 +451,7 @@ router.post(
         contact: {
           id: result.rows[0].id,
           name: result.rows[0].name,
-          role: result.rows[0].role,
+          title: result.rows[0].title,
           email: result.rows[0].email,
           phone: result.rows[0].phone,
           linkedinUrl: result.rows[0].linkedin_url,

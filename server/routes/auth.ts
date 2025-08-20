@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import jwt, { SignOptions } from "jsonwebtoken";
 import { Pool } from "pg";
 import { z } from "zod";
 import {
@@ -50,8 +50,9 @@ interface AuthRequest extends Request {
 }
 
 // JWT secret
-const JWT_SECRET = process.env.JWT_SECRET || "fallback-secret-for-development";
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
+const JWT_SECRET: string =
+  process.env.JWT_SECRET || "fallback-secret-for-development";
+const JWT_EXPIRES_IN: string = process.env.JWT_EXPIRES_IN || "7d";
 
 // Middleware to verify JWT token
 const authenticateToken = asyncHandler(
@@ -95,7 +96,7 @@ const authenticateToken = asyncHandler(
 
 // Generate JWT token
 function generateToken(userId: string): string {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+  return jwt.sign({ userId: userId }, JWT_SECRET, { expiresIn: "7d" });
 }
 
 // Register user

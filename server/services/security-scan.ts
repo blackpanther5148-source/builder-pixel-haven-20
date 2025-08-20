@@ -186,7 +186,10 @@ export class SecurityScanService {
     const findings = [];
 
     // Check file signature/magic bytes
-    const buffer = fs.readFileSync(filePath, { start: 0, end: 20 });
+    const buffer = Buffer.alloc(20);
+    const fd = fs.openSync(filePath, "r");
+    fs.readSync(fd, buffer, 0, 20, 0);
+    fs.closeSync(fd);
     const signature = buffer.toString("hex").toLowerCase();
 
     // PDF file checks
