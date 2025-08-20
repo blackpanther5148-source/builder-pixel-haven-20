@@ -1,28 +1,14 @@
 [build]
-  # Directory containing the built site
+  # Use the pre-built files
   publish = "dist/spa"
   
-  # Build command
-  command = "npm install && npm run build:client"
+  # Simple build command that just copies files
+  command = "echo 'Using pre-built files from dist/spa'"
   
-  # Node.js version
-  environment = { NODE_VERSION = "18" }
+  # Ignore server files
+  ignore = "server/"
 
-[build.processing]
-  skip_processing = false
-
-[build.processing.css]
-  bundle = true
-  minify = true
-
-[build.processing.js]
-  bundle = true
-  minify = true
-
-[build.processing.html]
-  pretty_urls = true
-
-# Handle client-side routing
+# Handle client-side routing for React Router
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -36,7 +22,6 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none';"
 
 # Cache static assets
 [[headers]]
