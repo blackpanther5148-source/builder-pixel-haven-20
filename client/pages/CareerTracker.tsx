@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useJobApplications, useJobApplicationStats } from "@/hooks/useApi";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -47,121 +48,74 @@ export default function CareerTracker() {
   const [showAddJob, setShowAddJob] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
+  
+  // API integration
+  const { data: applicationsData, loading: applicationsLoading, error: applicationsError } = useJobApplications();
+  const { data: statsData, loading: statsLoading } = useJobApplicationStats();
+  
+  const applications = applicationsData?.applications || [];
+  const stats = statsData?.stats;
 
   const jobStatuses = [
-    { id: "all", name: "All Applications", count: 24, color: "bg-gray-500" },
-    { id: "applied", name: "Applied", count: 8, color: "bg-blue-500" },
-    { id: "interview", name: "Interview", count: 5, color: "bg-yellow-500" },
-    { id: "offer", name: "Offer", count: 2, color: "bg-green-500" },
-    { id: "rejected", name: "Rejected", count: 9, color: "bg-red-500" },
+    { 
+      id: "all", 
+      name: "All Applications", 
+      count: stats?.totalApplications || 0, 
+      color: "bg-gray-500" 
+    },
+    { 
+      id: "applied", 
+      name: "Applied", 
+      count: stats?.appliedCount || 0, 
+      color: "bg-blue-500" 
+    },
+    { 
+      id: "interview", 
+      name: "Interview", 
+      count: stats?.interviewCount || 0, 
+      color: "bg-yellow-500" 
+    },
+    { 
+      id: "offer", 
+      name: "Offer", 
+      count: stats?.offerCount || 0, 
+      color: "bg-green-500" 
+    },
+    { 
+      id: "rejected", 
+      name: "Rejected", 
+      count: stats?.rejectedCount || 0, 
+      color: "bg-red-500" 
+    },
   ];
 
-  const applications = [
-    {
-      id: 1,
-      company: "Google",
-      position: "Senior Frontend Engineer",
-      location: "Mountain View, CA",
-      salary: "$160,000 - $180,000",
-      appliedDate: "2024-01-15",
-      status: "interview",
-      stage: "Technical Interview",
-      nextStep: "System Design Round",
-      nextDate: "2024-01-22",
-      priority: "high",
-      notes: "Great company culture, excited about the role",
-      contacts: [
-        { name: "Sarah Johnson", role: "Recruiter", email: "sarah@google.com" },
-        { name: "Mike Chen", role: "Hiring Manager", email: "mike@google.com" },
-      ],
-    },
-    {
-      id: 2,
-      company: "Microsoft",
-      position: "Full Stack Developer",
-      location: "Seattle, WA",
-      salary: "$140,000 - $165,000",
-      appliedDate: "2024-01-10",
-      status: "applied",
-      stage: "Application Review",
-      nextStep: "Waiting for response",
-      nextDate: null,
-      priority: "high",
-      notes: "Applied through LinkedIn, strong team match",
-      contacts: [
-        {
-          name: "Alex Rodriguez",
-          role: "Recruiter",
-          email: "alex@microsoft.com",
-        },
-      ],
-    },
-    {
-      id: 3,
-      company: "Amazon",
-      position: "Software Engineer II",
-      location: "Austin, TX",
-      salary: "$130,000 - $150,000",
-      appliedDate: "2024-01-08",
-      status: "offer",
-      stage: "Offer Received",
-      nextStep: "Negotiate terms",
-      nextDate: "2024-01-20",
-      priority: "high",
-      notes: "Competitive offer, considering benefits package",
-      contacts: [
-        { name: "Lisa Wang", role: "Hiring Manager", email: "lisa@amazon.com" },
-      ],
-    },
-    {
-      id: 4,
-      company: "Meta",
-      position: "React Developer",
-      location: "Menlo Park, CA",
-      salary: "$150,000 - $170,000",
-      appliedDate: "2024-01-05",
-      status: "rejected",
-      stage: "Final Interview",
-      nextStep: "Feedback received",
-      nextDate: null,
-      priority: "medium",
-      notes: "Great interview experience, good feedback for improvement",
-      contacts: [
-        { name: "David Kim", role: "Tech Lead", email: "david@meta.com" },
-      ],
-    },
-    {
-      id: 5,
-      company: "Netflix",
-      position: "Senior UI Engineer",
-      location: "Los Gatos, CA",
-      salary: "$170,000 - $190,000",
-      appliedDate: "2024-01-12",
-      status: "interview",
-      stage: "First Round",
-      nextStep: "Technical Assessment",
-      nextDate: "2024-01-25",
-      priority: "high",
-      notes: "Innovative projects, great growth opportunities",
-      contacts: [
-        {
-          name: "Emma Davis",
-          role: "Senior Recruiter",
-          email: "emma@netflix.com",
-        },
-      ],
-    },
-  ];
+  // Handle loading states
+  if (applicationsLoading || statsLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+        <div className="text-white text-xl">Loading your career data...</div>
+      </div>
+    );
+  }
+
+  // Handle errors
+  if (applicationsError) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+        <div className="text-red-400 text-xl">Error loading applications: {applicationsError}</div>
+      </div>
+    );
+  }
 
   const filteredApplications = applications.filter((app) => {
     const matchesSearch =
-      app.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      app.position.toLowerCase().includes(searchTerm.toLowerCase());
+      app.companyName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      app.jobTitle?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === "all" || app.status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
-  const stats = {
+  const calculatedStats = {
     totalApplications: applications.length,
     responseRate: Math.round(
       (applications.filter((app) => app.status !== "applied").length /
@@ -283,7 +237,7 @@ export default function CareerTracker() {
           <Card className="glass border-white/20 bg-transparent">
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold gradient-text">
-                {stats.responseRate}%
+                {calculatedStats.responseRate}%
               </div>
               <div className="text-gray-400 text-sm">Response Rate</div>
             </CardContent>
@@ -291,7 +245,7 @@ export default function CareerTracker() {
           <Card className="glass border-white/20 bg-transparent">
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold gradient-text">
-                {stats.interviewRate}%
+                {calculatedStats.interviewRate}%
               </div>
               <div className="text-gray-400 text-sm">Interview Rate</div>
             </CardContent>
@@ -299,7 +253,7 @@ export default function CareerTracker() {
           <Card className="glass border-white/20 bg-transparent">
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold gradient-text">
-                {stats.offerRate}%
+                {calculatedStats.offerRate}%
               </div>
               <div className="text-gray-400 text-sm">Offer Rate</div>
             </CardContent>

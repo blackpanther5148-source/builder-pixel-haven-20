@@ -26,6 +26,7 @@ import {
   Loader2,
   Check,
 } from "lucide-react";
+import { setAuth } from "@/lib/auth";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -157,8 +158,7 @@ export default function Signup() {
       }
 
       // Store token and user data
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      setAuth(data.token, data.user);
 
       setSuccess("Account created successfully! Redirecting...");
 

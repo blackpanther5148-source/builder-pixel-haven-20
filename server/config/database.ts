@@ -1,13 +1,8 @@
 import { Pool } from "pg";
 
-// Database connection configuration using your Neon database
+// Database connection configuration using local PostgreSQL
 const pool = new Pool({
-  connectionString:
-    process.env.DATABASE_URL ||
-    "postgresql://neondb_owner:npg_yLr5gvd1hQlB@ep-noisy-haze-abo2cy0v-pooler.eu-west-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require",
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  connectionString: process.env.DATABASE_URL,
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
@@ -15,7 +10,7 @@ const pool = new Pool({
 
 // Test database connection
 pool.on("connect", () => {
-  console.log("✅ Connected to Neon database");
+  console.log("✅ Connected to PostgreSQL database");
 });
 
 pool.on("error", (err) => {

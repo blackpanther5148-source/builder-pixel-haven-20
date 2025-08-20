@@ -25,3 +25,37 @@ dist-ssr
 
 .config/
 !.env
+
+# Clacky-related configuration
+.clackyai/
+
+# Package manager directories and files
+.pnpm-store
+.pnpm-debug.log*
+
+# TypeScript specific
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Build outputs
+build/
+out/
+
+# Environment files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Temporary folders
+tmp/
+temp/

@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 
 // Import route handlers
 import { handleDemo } from "./routes/demo";
-import { authRoutes } from "./routes/auth";
+import { authRoutes, authenticateToken } from "./routes/auth";
 import { resumeRoutes } from "./routes/resumes";
 import { coverLetterRoutes } from "./routes/cover-letters";
 import { jobApplicationRoutes } from "./routes/job-applications";
@@ -152,10 +152,17 @@ export function createServer() {
   app.use("/api/analytics", analyticsRoutes);
 
   // File upload endpoint with security scanning
-  app.post("/api/upload", upload.single("file"), async (req: any, res) => {
+  app.post("/api/upload", authenticateToken, upload.single("file"), async (req: any, res) => {
     try {
+      console.log('Upload request - User:', req.user);
+      console.log('Upload request - File:', req.file ? 'File received' : 'No file');
+      
       if (!req.file) {
         return res.status(400).json({ error: "No file uploaded" });
+      }
+      
+      if (!req.user || !req.user.id) {
+        return res.status(401).json({ error: "User not authenticated" });
       }
 
       // Store file information in database

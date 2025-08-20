@@ -1,0 +1,37 @@
+  column_name   |        data_type         
+----------------+--------------------------
+ id             | uuid
+ user_id        | uuid
+ title          | character varying
+ company_name   | character varying
+ job_title      | character varying
+ content        | text
+ template_style | character varying
+ created_at     | timestamp with time zone
+ updated_at     | timestamp with time zone
+(9 rows)
+
+   column_name    
+------------------
+ id
+ user_id
+ company_name
+ job_title
+ job_description
+ salary_range
+ location
+ status
+ application_date
+ follow_up_date
+ notes
+ job_url
+ resume_id
+ cover_letter_id
+ created_at
+ updated_at
+ current_stage
+ next_step
+ next_date
+ priority
+(20 rows)
+

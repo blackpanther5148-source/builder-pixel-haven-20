@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { usePortfolio } from "@/hooks/useApi";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -35,6 +36,10 @@ import {
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState("gallery");
   const [showAddProject, setShowAddProject] = useState(false);
+  
+  // API integration
+  const { data: portfolioData, loading, error } = usePortfolio();
+  const projects = portfolioData?.projects || [];
 
   const projectCategories = [
     {
@@ -69,22 +74,25 @@ export default function Portfolio() {
     },
   ];
 
-  const projects = [
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      description:
-        "Full-stack e-commerce solution with React, Node.js, and PostgreSQL",
-      category: "web",
-      image: "/placeholder.svg",
-      technologies: ["React", "Node.js", "PostgreSQL", "Stripe"],
-      liveUrl: "https://example.com",
-      githubUrl: "https://github.com/example",
-      date: "2024-01-15",
-      likes: 24,
-      views: 156,
-      featured: true,
-    },
+  // Handle loading states
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+        <div className="text-white text-xl">Loading your portfolio...</div>
+      </div>
+    );
+  }
+
+  // Handle errors
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+        <div className="text-red-400 text-xl">Error loading portfolio: {error}</div>
+      </div>
+    );
+  }
+
+  const mockProjects = [
     {
       id: 2,
       title: "Task Management Mobile App",

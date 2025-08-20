@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { useAnalytics, useResumes, useCoverLetters, useJobApplicationStats } from "@/hooks/useApi";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -30,11 +32,33 @@ import {
   Award,
   Clock,
   CheckCircle2,
+  LogOut,
 } from "lucide-react";
 
 export default function Dashboard() {
+  const { user, loading, logout } = useAuth(true); // Require authentication
   const [jobReadinessScore, setJobReadinessScore] = useState(0);
   const [activeTab, setActiveTab] = useState("dashboard");
+  
+  // API data
+  const { data: analyticsData } = useAnalytics();
+  const { data: resumesData } = useResumes();
+  const { data: coverLettersData } = useCoverLetters();
+  const { data: jobStatsData } = useJobApplicationStats();
+  
+  const analytics = analyticsData?.analytics;
+  const resumeCount = resumesData?.resumes?.length || 0;
+  const coverLetterCount = coverLettersData?.coverLetters?.length || 0;
+  const jobStats = jobStatsData?.stats;
+
+  // Show loading spinner while checking authentication
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   useEffect(() => {
     // Animate job readiness score
@@ -55,13 +79,13 @@ export default function Dashboard() {
       id: "resume",
       icon: <FileText className="w-5 h-5" />,
       label: "Resume Builder",
-      count: 3,
+      count: resumeCount,
     },
     {
       id: "cover-letter",
       icon: <MessageSquare className="w-5 h-5" />,
       label: "Cover Letter",
-      count: 2,
+      count: coverLetterCount,
     },
     {
       id: "portfolio",
@@ -267,7 +291,7 @@ export default function Dashboard() {
             <div>
               <h1 className="text-2xl font-bold text-white">Dashboard</h1>
               <p className="text-gray-400">
-                Welcome back! Here's your career progress overview.
+                Welcome back, {user?.firstName}! Here's your career progress overview.
               </p>
             </div>
 
@@ -293,6 +317,15 @@ export default function Dashboard() {
               >
                 <Plus className="w-4 h-4 mr-2" />
                 New
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={logout}
+                className="glass border-white/20 text-white hover:bg-white/10"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
               </Button>
             </div>
           </div>
